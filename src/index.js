@@ -1,6 +1,6 @@
 import "./styles/style.css"
 import InitView from "./modules/loadInitContent";
-
+import GetItems from "./modules/storageController";
 
 const loadDisplay = () => {
 
@@ -11,7 +11,7 @@ const loadDisplay = () => {
         InitView.loadNav(content)
 
         // Function that Loads 'Boards' onto screen
-
+        let run = () => GetItems
     }
 
     return {

@@ -1,7 +1,11 @@
 export class Task {
-    constructor(name, desc) {
+    #taskID
+    refBoard = 0
+    constructor(name, desc, ID, parentRef) {
         this.name = name
         this.desc = desc
+        this.#taskID = ID
+        this.parentRef = parentRef
     }
 
 }
