@@ -1,10 +1,10 @@
 import Help from "../helper";
 
-// This will be responsible for loading the DOM related elements onto the page
+// Responsible for loading the DOM el. to HTML, for initial page view
 const InitView = (()=> {
 
     const loadNav = (content) => {
-        // Create Hamburger Menu
+        // Create Hamburger Menu in DOM
         const hamburger = (() => {
             const showHam = () => {
                 const hamBtn = Help.makeEl("div", {
@@ -34,13 +34,28 @@ const InitView = (()=> {
          }
         })()
 
+        const loadTitle = (() => {
+            const titleText = Help.makeEl("h1", {
+                class: "main-title"
+            }, "To Doify")
+            return {
+                titleText
+            }
+        })()
+
+        // Create nav in DOM
         const navBar = Help.makeEl("div", {
             class: "nav-bar",
             id: "nav"
-        }, hamburger.showHam())
+        }, hamburger.showHam(), loadTitle.titleText)
 
-        content.appendChild(navBar)
-        hamburger.animateHam()
+        // Add items to HTML
+        const addItems = () => {
+            content.appendChild(navBar)
+            hamburger.animateHam()
+        }
+
+        addItems()
     }
 
     return {

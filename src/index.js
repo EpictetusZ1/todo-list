@@ -7,8 +7,10 @@ const loadDisplay = () => {
     const content = document.getElementById("content")
 
     const showContent = () => {
-        // Load & Add Nav to DOM + Page
+        // Load Nav into HTML
         InitView.loadNav(content)
+
+        // Function that Loads 'Boards' onto screen
 
     }
 

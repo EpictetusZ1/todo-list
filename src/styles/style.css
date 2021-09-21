@@ -42,6 +42,7 @@ body {
     height: 30px;
     margin-left: 10px;
     position: relative;
+    z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,3 +89,15 @@ body {
 .menu-btn.open .menu-btn-burger::after {
     transform: rotate(-45deg);
 }
+
+.main-title {
+    width: 100%;
+    margin-left: -60px;
+    position: relative;
+    z-index: 1;
+    font-size: 2em;
+    color: var(--gold);
+    text-align: center;
+    line-height: 55px;
+}
+
