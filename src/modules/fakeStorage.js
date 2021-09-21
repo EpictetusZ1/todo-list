@@ -7,15 +7,20 @@ import {ProjectBoard} from "./board";
 const Test = (() => {
     const alpha = () => {
         let todos = []
+        let projects = []
 
         let taskOne = new Task("Test One", "Pretty Good", 55, 1)
         let taskTwo = new Task("Test Two", "Not Bad", 56, 1)
 
-        let testBoard = new ProjectBoard("Project One", "September 21", 1)
+        let testBoard = new ProjectBoard("Default Project", "September 21", 1)
+
 
         todos.push(taskOne, taskTwo)
         testBoard.addItems(todos)
-        return testBoard
+
+        projects.push(testBoard)
+
+        return projects
     }
     return {
         alpha

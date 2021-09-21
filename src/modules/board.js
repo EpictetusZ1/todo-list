@@ -14,7 +14,7 @@ export class ProjectBoard {
             if (arr[i].parentRef === this.refNum) {
                 this.items.push(arr[i])
             } else {
-                console.log(arr[i])
+                console.log("Error at: " + arr[i])
             }
         }
     }
