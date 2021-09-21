@@ -12,7 +12,7 @@ const loadDisplay = () => {
         InitView.loadNav(content)
 
         // Function that Loads 'Boards' onto screen
-        AddContent.addBoards(content)
+        AddContent.getBoard(content)
     }
 
     return {

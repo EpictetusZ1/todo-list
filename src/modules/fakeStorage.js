@@ -9,10 +9,10 @@ const Test = (() => {
         let todos = []
         let projects = []
 
-        let taskOne = new Task("Test One", "Pretty Good", 55, 1)
-        let taskTwo = new Task("Test Two", "Not Bad", 56, 1)
+        let taskOne = new Task("Test One", "Pretty Good", 55, 30)
+        let taskTwo = new Task("Test Two", "Not Bad", 56, 30)
 
-        let testBoard = new ProjectBoard("Default Project", "September 21", 1)
+        let testBoard = new ProjectBoard("Default Project", "September 21", 30)
 
 
         todos.push(taskOne, taskTwo)
