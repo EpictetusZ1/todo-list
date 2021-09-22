@@ -9,8 +9,8 @@ const Test = (() => {
         let todos = []
         let projects = []
 
-        let taskOne = new Task("Test One", "Pretty Good", 55, 30)
-        let taskTwo = new Task("Test Two", "Not Bad", 56, 30)
+        let taskOne = new Task("Add Svgs to project", "Pretty Good", 55, 30)
+        let taskTwo = new Task("Create controller module", "Not Bad", 56, 30)
 
         let testBoard = new ProjectBoard("Default Project", "September 21", 30)
 

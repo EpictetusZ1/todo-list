@@ -11,4 +11,12 @@ export class Task {
         this.parentRef = parentRef
     }
 
+    set updateState(int) {
+        if (typeof int === typeof Number) {
+            return this.progressState = int
+        } else {
+            return console.log("Not a Number Value")
+        }
+    }
+
 }

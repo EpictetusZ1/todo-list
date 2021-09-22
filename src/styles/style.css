@@ -153,15 +153,31 @@ body {
     justify-content: flex-start;
 }
 
-.project-status-section {
+.status-section {
     height: 65vh;
     min-height: 60vh;
     width: 24vw;
     margin: 5px 35px 5px 0;
 
     /*Here for spacing view*/
-    background-color: #71806c;
+    /*background-color: #71806c;*/
     border-radius: 20px;
+
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.status-title {
+    height: 1.5em;
+    width: auto;
+    max-width: 20vw;
+    margin-top: 8px;
+    font-family: Geomanist, sans-serif;
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    text-align: left;
+    color: var(--gold);
 }
 
 .add-btn {
@@ -172,10 +188,18 @@ body {
     text-align: right;
 }
 
-.task-container {
-    width: 100%;
+.task-card {
+    width: 90%;
     height: auto;
-    min-height: 15vh;
+    min-height: 10vh;
+    margin-bottom: 20px;
     background: #FFF;
     border-radius: 8px;
+    box-shadow: rgba(35, 35, 35, 0.3) 0 19px 38px, rgba(70, 70, 70, 0.22) 0 15px 12px;
+}
+
+.task-title {
+    margin: 10px 0 0 10px;
+    font-size: 1.1em;
+    color: var(--rose);
 }
