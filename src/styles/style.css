@@ -13,11 +13,11 @@
 }
 
 :root {
-    --salsa: #Ef5859FF;
-    --purp: #963AA2FF;
-    --eerie: #181818FF;
-    --rose: #C28382FF;
-    --gold: #E6BF8AFF;
+    --salsa: #Ef5859;
+    --purp: #963AA2;
+    --eerie: #181818;
+    --rose: #C28382;
+    --gold: #E6BF8A;
     --lightGrey: #2C2C2C;
     --lavender: #F1E3E4;
 }
@@ -193,17 +193,31 @@ body {
 .task-card {
     width: 90%;
     height: auto;
-    min-height: 10vh;
+    min-height: 12vh;
     margin-bottom: 20px;
     background: #FFF;
     border-radius: 8px;
     box-shadow: rgba(35, 35, 35, 0.3) 0 19px 38px, rgba(70, 70, 70, 0.22) 0 15px 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.check {
+    margin: 10px 0 0 10px;
+    height: 1.5em;
+    width: auto;
+    justify-self: start;
+    cursor: pointer;
 }
 
 .task-title {
     margin: 10px 0 0 10px;
     font-size: 1.1em;
+    line-height: 1.5em;
     color: var(--rose);
     font-family: Geomanist, sans-serif;
     font-weight: normal;
+    text-align: center;
+    justify-self: flex-start;
 }

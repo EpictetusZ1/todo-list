@@ -72,13 +72,19 @@ const AddContent = (()=> {
                         const doneState = document.getElementById("state-2")
 
                         const getCard = (target) =>  {
+
+                            let unChecked = Help.makeEl("img", {
+                                src: target.imgSrc,
+                                class: "check"
+                            })
+
                             let title =  Help.makeEl("p", {
                                 class: "task-title"
                             }, target.name)
 
                             return Help.makeEl("div", { // Card element
-                                class: "task-card"
-                            }, title)
+                                class: `task-card task-${target.taskID}`
+                            }, unChecked,title)
                         }
 
                         const getTaskData = () => {

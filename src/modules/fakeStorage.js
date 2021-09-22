@@ -12,18 +12,22 @@ const Test = (() => {
         let taskOne = new Task("Add Svgs to project", "Pretty Good", 55, 30)
 
         let taskTwo = new Task("Create controller module", "Not Bad", 56, 30)
+
         let taskThree = new Task("Handle switch case more elegantly", "Could be worse", 57, 30)
+
+        let taskFour = new Task("Get it done", "The best", 58, 30)
 
         let testBoard = new ProjectBoard("Default Project", "September 21", 30)
 
 
-        todos.push(taskOne, taskTwo, taskThree)
+        todos.push(taskOne, taskTwo, taskThree, taskFour)
         testBoard.addItems(todos)
 
         projects.push(testBoard)
 
         taskOne.updateState(1)
         taskThree.updateState(0)
+        taskFour.updateState(2)
 
         return projects
     }
