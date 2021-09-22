@@ -2,7 +2,8 @@
 
 @font-face {
     font-family: 'Geomanist';
-    src: url("/src/assets/fonts/hinted-Geomanist-Bold.ttf");
+    src: url("/src/assets/fonts/geomanist-regular-webfont.ttf");
+    font-weight: normal;
 }
 
 @font-face {
@@ -174,6 +175,7 @@ body {
     max-width: 20vw;
     margin-top: 8px;
     font-family: Geomanist, sans-serif;
+    font-weight: bold;
     font-size: 1.5em;
     letter-spacing: 1px;
     text-align: left;
@@ -202,4 +204,6 @@ body {
     margin: 10px 0 0 10px;
     font-size: 1.1em;
     color: var(--rose);
+    font-family: Geomanist, sans-serif;
+    font-weight: normal;
 }

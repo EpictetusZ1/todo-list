@@ -3,8 +3,10 @@ import Help from "../helper";
 
 const AddContent = (()=> {
 
-    // Importing made up array of items for development
+    // This is the only call to Board and Task items
     const elements = GetStorage
+
+    // All DOM methods ref the below which is the ONE 'Project' Obj.
     let targetProject = elements[0]
 
     const showBoards = (content) => {
@@ -48,7 +50,7 @@ const AddContent = (()=> {
                         const statusRef = document.querySelector(".status-container")
 
                         for (let i = 0; i < designations.length; i ++) {
-                            let statusID = designations[i][i].status
+                            let statusID = designations[i].status
 
                             let statusTitle = Help.makeEl("p", {
                                 class: "status-title"
@@ -70,7 +72,6 @@ const AddContent = (()=> {
                         const doneState = document.getElementById("state-2")
 
                         const getCard = (target) =>  {
-
                             let title =  Help.makeEl("p", {
                                 class: "task-title"
                             }, target.name)
@@ -80,21 +81,35 @@ const AddContent = (()=> {
                             }, title)
                         }
 
-                        for (let i = 0; i < targetProject.items.length; i++) {
-                            let targetTask = targetProject.items[i]
-                            let identifier = targetTask.progressState
-                            switch (identifier) {
-                                case 0:
-                                    // Write Function to populate from the DOM here
-                                    noState.appendChild(getCard(targetTask))
-                                    break
-                                case 1:
-                                    doingState.appendChild(getCard(targetTask))
-                                    break
-                                case 2:
-                                    doneState.appendChild(getCard(targetTask))
+                        const getTaskData = () => {
+                            // Loop though the 3 possible task states
+                            for (let x = 0; x < targetProject.taskState.length; x++) {
+
+                                // Look at what sub items are in each task state and return it to the DOM
+                                for (let i = 0; i < targetProject.taskState[x].subItems.length; i++) {
+
+                                    // Get task status from object
+                                    let targetTask = targetProject.taskState[x].subItems[i]
+
+                                    // Update board in DOM
+                                    let identifier = targetTask.progressState
+
+                                    switch (identifier) {
+                                        default:
+                                        case 0:
+                                            noState.appendChild(getCard(targetTask))
+                                            break
+                                        case 1:
+                                            doingState.appendChild(getCard(targetTask))
+                                            break
+                                        case 2:
+                                            doneState.appendChild(getCard(targetTask))
+                                            break
+                                    }
+                                }
                             }
                         }
+                        getTaskData()
                     }
                     populateStatusAreas()
                 }

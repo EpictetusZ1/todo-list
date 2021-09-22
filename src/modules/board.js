@@ -5,9 +5,9 @@ export class ProjectBoard {
     refNum = 0
     items = []
     taskState = [
-        {0: {status: "No Status", subItems: []}},
-        {1: {status: "Doing", subItems: []}},
-        {2: {status: "Done", subItems: []}},
+        {code: 0, status: "No Status", subItems: []},
+        {code: 1, status: "Doing", subItems: []},
+        {code: 2, status: "Done", subItems: []},
         ]
     constructor(title, dateCreated, refNum) {
         this.title = title
@@ -16,15 +16,19 @@ export class ProjectBoard {
     }
 
     assignState(item) {
+        // Assign task items to sub item arrays
         switch (item.progressState) {
             case 0:
-                this.taskState[0][0].subItems.push(item)
+                this.taskState[0].subItems.push(item)
                 break
             case 1:
-                this.taskState[1][0].subItems.push(item)
+                this.taskState[1].subItems.push(item)
                 break
             case 2:
-                this.taskState[2][0].subItems.push(item)
+                this.taskState[2].subItems.push(item)
+                break
+            default:
+                console.log(this.taskState[0])
         }
     }
 
