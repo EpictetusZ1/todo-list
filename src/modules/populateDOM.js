@@ -5,9 +5,10 @@ const AddContent = (()=> {
 
     // Importing made up array of items for development
     const elements = GetStorage
+    let targetProject = elements[0]
+
 
     const showBoards = (content) => {
-        // Might want to add a switch handler here for diff project views
         const showBoardContainer = () => {
             const projectView = Help.makeEl("div", {
                 class: "board-container"
@@ -15,70 +16,105 @@ const AddContent = (()=> {
             content.appendChild(projectView)
         }
 
-        const showProjectTitle = () => {
+        const showProject = () => {
             const container = document.querySelector(".board-container")
 
-            // Loop through all Projects
-                for (let i = 0; i < elements.length; i++) {
+            const getProject = () => {
+                // Get Project from Array in memory
+                console.log(targetProject)
 
-                    // Get Project from Array in memory
-                    let targetProject = elements[i]
-
-                    let title = targetProject.title
-
-                    let addItemBtn = Help.makeEl("span",{
-                        class: "add-btn"
-                    }, "+")
-                    let addTitle = Help.makeEl("div", {
-                        class: "project-title"
-                    }, title, addItemBtn)
-
-                    let board = Help.makeEl("div", {
-                        class: `project-board project-${targetProject.refNum}`
-                    }, addTitle)
-                    container.appendChild(board)
-                }
-            }
-
-
-        const populateTasks = () => {
-            let tasks = elements[0]
-
-            const targetBoard = document.querySelector(`.project-board`)
-
-
-            // Loop through tasks in Project
-            const addTaskContainer = () => {
-                let taskContainer = Help.makeEl("div", {
-                    class: `task-container task-${tasks.items[1].taskID}`
+                let project = Help.makeEl("div", {
+                    class: `project-container project-${targetProject.refNum}`
                 })
-                for (let i = 0; i < tasks.items.length; i++) {
-                    // Add task data here
-                    console.log(tasks.items[i])
-
-                }
-                let test =  Help.makeEl("p", {
-                    class: "title"
-                }, tasks.items[1].name,tasks.items[1].desc)
-
-
-                taskContainer.appendChild(test)
-                targetBoard.appendChild(taskContainer)
+                container.appendChild(project)
             }
-            addTaskContainer()
-        }
+            getProject()
 
-       // Append Elements Here with actual function calls
+            const populateProject = () => {
+                const projectArea = document.querySelector(`.project-${targetProject.refNum}`)
+
+                const getProjectTitle = () => {
+                    let title = Help.makeEl("p", {
+                        class: "project-title"
+                    }, `${targetProject.title}`)
+                    projectArea.appendChild(title)
+                }
+
+                const showStatusBoards = () => {
+                    let designations = targetProject.taskState
+
+                    console.dir(designations)
+
+                    let statusContainer = Help.makeEl("div", {
+                        class: "status-container"
+                    })
+                    projectArea.appendChild(statusContainer)
+
+                    const showStatusAreas = () => {
+                        const statusRef = document.querySelector(".status-container")
+
+                        for (let i = 0; i < designations.length; i ++) {
+                            let statusArea = Help.makeEl("div", {
+                                class: "project-status-section"
+                            })
+                            statusRef.appendChild(statusArea)
+                        }
+
+                    }
+                    showStatusAreas()
+                }
+
+                return {
+                    getProjectTitle,
+                    showStatusBoards
+                }
+            }
+            populateProject().getProjectTitle()
+            populateProject().showStatusBoards()
+
+            }
+
+
+        // const populateTasks = () => {
+        //     let tasks = elements[0]
+        //
+        //     const targetBoard = document.querySelector(`.project-board`)
+        //
+        //
+        //     // Loop through tasks in Project
+        //     const addTaskContainer = () => {
+        //         let taskContainer = Help.makeEl("div", {
+        //             class: `task-container task-${tasks.items[1].taskID}`
+        //         })
+        //         for (let i = 0; i < tasks.items.length; i++) {
+        //             // Add task data here
+        //
+        //             console.log(tasks.items[i])
+        //
+        //         }
+        //         let test =  Help.makeEl("p", {
+        //             class: "title"
+        //         }, tasks.items[1].name,tasks.items[1].desc)
+        //
+        //
+        //         taskContainer.appendChild(test)
+        //         targetBoard.appendChild(taskContainer)
+        //     }
+        //     addTaskContainer()
+        // }
+
         return {
             showBoardContainer,
-            showProjectTitle,
-            populateTasks
+            showProject,
+            // populateTasks
         }
     }
-    const getBoard = (content) => {
+
+    const getBoard = (content) => { // Controller Function for calling the separate elements
+
         showBoards(content).showBoardContainer()
-        showBoards().showProjectTitle()
-        showBoards().populateTasks()
+        showBoards().showProject()
+        // showBoards().populateTasks()
     }
 
     return {
