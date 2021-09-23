@@ -70,8 +70,15 @@ const AddContent = (()=> {
                         const doneState = document.getElementById(`state-2-${targetProject.refNum}`)
 
                         const getCard = (target) =>  {
-                            // TODO: ADD TAGS here for task
-                            //The call will be to targetTask.tags which is an array
+
+                            let date = Help.makeEl("p",{
+                                class: "date-text"
+                            }, "Created: ")
+
+                            let dateContainer = Help.makeEl("div", {
+                                class: "date-container"
+                            }, date)
+
 
                             let descText = Help.makeEl("p", {
                                 class: "desc-text"
@@ -81,6 +88,7 @@ const AddContent = (()=> {
                                 class: "desc-container"
                             }, descText)
 
+                            // Call will be to an array of task tags
                             let tagContainer = Help.makeEl("div", {
                                 class: "tag-container"
                             }, ...GetTags.createTag(target))
@@ -100,7 +108,7 @@ const AddContent = (()=> {
 
                             return Help.makeEl("div", { // Card element
                                 class: `task-card task-${target.taskID}`
-                            }, titleContainer, tagContainer, descContainer)
+                            }, titleContainer, tagContainer, descContainer, dateContainer)
                         }
 
                         // Loop though the 3 possible task states

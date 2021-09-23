@@ -1,19 +1,18 @@
 import Help from "../helper";
 
 const GetTags = (() => {
-    const palette = [
-        "#5c1265",
-        "#B8781F",
-        "#962727",
-        "#EDA1A1",
-        "#3B0E0E",
-        "#C7BDBD"
+    const palette =[
+        "#d9413f",
+        "#6d93c7",
+        "#275B5C",
+        "#52FFB8",
+        "#59344F"
     ]
+
     const setClassColor = (tag, i) => {
         return tag.style.backgroundColor = palette[i]
     }
     const createTag = (target) => {
-
             let tags = target.tags
             let domTags = []
 
