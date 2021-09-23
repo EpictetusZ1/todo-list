@@ -14,6 +14,8 @@ export class Task {
         this.desc = desc
         this.taskID = ID
         this.parentRef = parentRef
+        this.tags = tags
+
     }
 
     updateState(int) {
@@ -25,8 +27,8 @@ export class Task {
         }
     }
 
-    updateTags(str) {
-        return this.tags.push(str)
+    updateTags(newTag) {
+        return this.tags.push(newTag)
     }
 
 }

@@ -69,6 +69,7 @@ const AddContent = (()=> {
                         const doneState = document.getElementById("state-2")
 
                         const getCard = (target) =>  {
+                            // TODO: ADD TAGS here for task
                             let unChecked = Help.makeEl("img", {
                                 src: target.imgSrc,
                                 class: "check"
@@ -80,7 +81,7 @@ const AddContent = (()=> {
 
                             return Help.makeEl("div", { // Card element
                                 class: `task-card task-${target.taskID}`
-                            }, unChecked,title)
+                            }, unChecked, title)
                         }
 
                         // Loop though the 3 possible task states
@@ -89,9 +90,8 @@ const AddContent = (()=> {
                             for (let i = 0; i < targetProject.taskState[x].subItems.length; i++) {
 
                                 let targetTask = targetProject.taskState[x].subItems[i]
-                                let identifier = targetTask.progressState
 
-                                switch (identifier) {
+                                switch (targetTask.progressState) {
                                     default:
                                     case 0:
                                         noState.appendChild(getCard(targetTask))
