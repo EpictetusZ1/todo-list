@@ -1,6 +1,6 @@
 import "./styles/style.css"
-import InitView from "./modules/loadInitContent";
-import AddContent from "./modules/populateDOM";
+import InitView from "./modules/typeController/loadInitContent";
+import AddContent from "./modules/typePopulate/populateDOM";
 
 
 const loadDisplay = () => {

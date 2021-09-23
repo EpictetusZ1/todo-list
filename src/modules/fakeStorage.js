@@ -1,7 +1,7 @@
 // This module serves to emulate storage
 
-import {Task} from "./tasks";
-import {ProjectBoard} from "./board";
+import {Task} from "./typeCreate/tasks";
+import {ProjectBoard} from "./typeCreate/board";
 
 // Here will be where the objects are created from the DOM FORMDATA obj. later
 const Test = (() => {
@@ -9,9 +9,11 @@ const Test = (() => {
         let todos = []
         let projects = []
 
-        let taskOne = new Task("Add Svgs to project", "Pretty Good", 55, 30)
+        let oneTags = ["Illustrator", "Design"]
+        let taskOne = new Task("Add Svgs to project", "Pretty Good", 55, 30, oneTags)
 
-        let taskTwo = new Task("Create controller module", "Not Bad", 56, 30)
+        let twoTags = ["Import", "Fun Work"]
+        let taskTwo = new Task("Create controller module", "Not Bad", 56, 30, twoTags)
 
         let taskThree = new Task("Handle switch case more elegantly", "Could be worse", 57, 30)
 
@@ -26,6 +28,8 @@ const Test = (() => {
         projects.push(testBoard)
 
         taskOne.updateState(1)
+        taskOne.updateTags("Stylin")
+
         taskThree.updateState(0)
         taskFour.updateState(2)
 

@@ -1,5 +1,5 @@
-import check from "../assets/icons/checkSVG/checked.svg"
-import notCheck from "../assets/icons/checkSVG/unChecked.svg"
+import check from "../../assets/icons/checkSVG/checked.svg"
+import notCheck from "../../assets/icons/checkSVG/unChecked.svg"
 
 export class Task {
     name = ""
@@ -9,10 +9,10 @@ export class Task {
     tags = []
     progressState = 0
     imgSrc = notCheck
-    constructor(name, desc, ID, parentRef, tags = [], progressState = 0, imgSrc = notCheck) {
+    constructor(name, desc, taskID, parentRef, tags = [], progressState = 0, imgSrc = notCheck) {
         this.name = name
         this.desc = desc
-        this.taskID = ID
+        this.taskID = taskID
         this.parentRef = parentRef
         this.tags = tags
 

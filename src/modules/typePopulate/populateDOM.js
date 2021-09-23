@@ -1,5 +1,6 @@
-import GetStorage from "./storageController";
+import GetStorage from "../typeController/storageController";
 import Help from "../helper";
+import GetTags from "./populateTags";
 
 const AddContent = (()=> {
 
@@ -70,6 +71,12 @@ const AddContent = (()=> {
 
                         const getCard = (target) =>  {
                             // TODO: ADD TAGS here for task
+                            //The call will be to targetTask.tags which is an array
+
+                            let tagContainer = Help.makeEl("div", {
+                                class: "tag-container"
+                            }, ...GetTags.createTag(target))
+
                             let unChecked = Help.makeEl("img", {
                                 src: target.imgSrc,
                                 class: "check"
@@ -81,7 +88,7 @@ const AddContent = (()=> {
 
                             return Help.makeEl("div", { // Card element
                                 class: `task-card task-${target.taskID}`
-                            }, unChecked, title)
+                            }, unChecked, title, tagContainer)
                         }
 
                         // Loop though the 3 possible task states

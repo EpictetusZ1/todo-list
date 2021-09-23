@@ -1,4 +1,4 @@
-import Test from "./fakeStorage";
+import Test from "../fakeStorage";
 
 // Designed to Hold boards and tasks in local memory
 
