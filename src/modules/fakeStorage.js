@@ -15,7 +15,7 @@ const Test = (() => {
         let twoTags = ["Import", "Fun Work"]
         let taskTwo = new Task("Create controller module", "Not Bad", 56, 30, twoTags)
 
-        let taskThree = new Task("Handle switch case more elegantly", "Could be worse", 57, 30)
+        let taskThree = new Task("Handle ALL the modules", "Could be worse", 57, 30)
 
         let taskFour = new Task("Get it done", "The best", 58, 30)
 
@@ -25,7 +25,7 @@ const Test = (() => {
         todos.push(taskOne, taskTwo, taskThree, taskFour)
         testBoard.addItems(todos)
 
-        projects.push(testBoard)
+        projects.pusclh(testBoard)
 
         taskOne.updateState(1)
         taskOne.updateTags("Stylin")

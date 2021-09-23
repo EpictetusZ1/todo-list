@@ -55,7 +55,7 @@ const AddContent = (()=> {
 
                         let statusSection = Help.makeEl("div", {
                             class: `status-section`,
-                            id: `state-${i}`
+                            id: `state-${i}-${targetProject.refNum}`
                         }, statusTitle)
 
                         statusRef.appendChild(statusSection)
@@ -65,13 +65,21 @@ const AddContent = (()=> {
                 const popStatusBoards = () => {
 
                     const getTaskData = () => {
-                        const noState = document.getElementById("state-0")
-                        const doingState = document.getElementById("state-1")
-                        const doneState = document.getElementById("state-2")
+                        const noState = document.getElementById(`state-0-${targetProject.refNum}`)
+                        const doingState = document.getElementById(`state-1-${targetProject.refNum}`)
+                        const doneState = document.getElementById(`state-2-${targetProject.refNum}`)
 
                         const getCard = (target) =>  {
                             // TODO: ADD TAGS here for task
                             //The call will be to targetTask.tags which is an array
+
+                            let descText = Help.makeEl("p", {
+                                class: "desc-text"
+                            }, target.desc)
+
+                            let descContainer = Help.makeEl("div", {
+                                class: "desc-container"
+                            }, descText)
 
                             let tagContainer = Help.makeEl("div", {
                                 class: "tag-container"
@@ -86,9 +94,13 @@ const AddContent = (()=> {
                                 class: "task-title"
                             }, target.name)
 
+                            let titleContainer = Help.makeEl("div", {
+                                class: "card-title-container"
+                            }, unChecked, title)
+
                             return Help.makeEl("div", { // Card element
                                 class: `task-card task-${target.taskID}`
-                            }, unChecked, title, tagContainer)
+                            }, titleContainer, tagContainer, descContainer)
                         }
 
                         // Loop though the 3 possible task states
@@ -128,7 +140,6 @@ const AddContent = (()=> {
                 pop: popProject,
             }
             }
-
         return {
             addBoardArea,
             project: showProject,
