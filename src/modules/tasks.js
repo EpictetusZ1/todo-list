@@ -6,14 +6,14 @@ export class Task {
     desc = ""
     taskID= 0
     parentRef = 0
+    tags = []
     progressState = 0
-    imgSrc
-    constructor(name, desc, ID, parentRef, progressState = 0, imgSrc = notCheck) {
+    imgSrc = notCheck
+    constructor(name, desc, ID, parentRef, tags = [], progressState = 0, imgSrc = notCheck) {
         this.name = name
         this.desc = desc
         this.taskID = ID
         this.parentRef = parentRef
-        this.imgSrc = imgSrc
     }
 
     updateState(int) {
@@ -23,7 +23,10 @@ export class Task {
             this.imgSrc = check
             return this.progressState = int;
         }
+    }
 
+    updateTags(str) {
+        return this.tags.push(str)
     }
 
 }

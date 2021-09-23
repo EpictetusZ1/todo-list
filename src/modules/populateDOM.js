@@ -9,70 +9,66 @@ const AddContent = (()=> {
     // All DOM methods ref the below which is the ONE 'Project' Obj.
     let targetProject = elements[0]
 
-    const showBoards = (content) => {
-        const showBoardContainer = () => {
+    const showBoard = (content) => {
+        const addBoardArea = () => {
             const projectView = Help.makeEl("div", {
                 class: "board-container"
             })
-            content.appendChild(projectView)
+            return content.appendChild(projectView)
         }
 
         const showProject = () => {
             const container = document.querySelector(".board-container")
 
-            const getProject = () => {
+            const selectProject = () => {
                 let project = Help.makeEl("div", {
                     class: `project-container project-${targetProject.refNum}`
                 })
-                container.appendChild(project)
+                return container.appendChild(project)
             }
-            getProject()
 
-            const populateProject = () => {
+            const popProject = () => {
                 const projectArea = document.querySelector(`.project-${targetProject.refNum}`)
 
-                const getProjectTitle = () => {
+                const addProjectData = () => {
                     let title = Help.makeEl("p", {
                         class: "project-title"
                     }, `${targetProject.title}`)
                     projectArea.appendChild(title)
-                }
-
-                const showStatusBoards = () => {
-                    let designations = targetProject.taskState
-
                     let statusContainer = Help.makeEl("div", {
                         class: "status-container"
                     })
-                    projectArea.appendChild(statusContainer)
+                    return projectArea.appendChild(statusContainer)
+                }
 
-                    const showStatusAreas = () => {
-                        const statusRef = document.querySelector(".status-container")
+                const showStatusAreas = () => {
+                    const statusRef = document.querySelector(".status-container")
+                    const designations = targetProject.taskState
 
-                        for (let i = 0; i < designations.length; i ++) {
-                            let statusID = designations[i].status
+                    for (let i = 0; i < designations.length; i ++) {
+                        let statusID = designations[i].status
 
-                            let statusTitle = Help.makeEl("p", {
-                                class: "status-title"
-                            }, statusID)
+                        let statusTitle = Help.makeEl("p", {
+                            class: "status-title"
+                        }, statusID)
 
-                            let statusSection = Help.makeEl("div", {
-                                class: `status-section`,
-                                id: `state-${i}`
-                            }, statusTitle)
+                        let statusSection = Help.makeEl("div", {
+                            class: `status-section`,
+                            id: `state-${i}`
+                        }, statusTitle)
 
-                            statusRef.appendChild(statusSection)
-                        }
+                        statusRef.appendChild(statusSection)
                     }
-                    showStatusAreas()
+                }
 
-                    const populateStatusAreas = () => {
+                const popStatusBoards = () => {
+
+                    const getTaskData = () => {
                         const noState = document.getElementById("state-0")
                         const doingState = document.getElementById("state-1")
                         const doneState = document.getElementById("state-2")
 
                         const getCard = (target) =>  {
-
                             let unChecked = Help.makeEl("img", {
                                 src: target.imgSrc,
                                 class: "check"
@@ -87,56 +83,63 @@ const AddContent = (()=> {
                             }, unChecked,title)
                         }
 
-                        const getTaskData = () => {
-                            // Loop though the 3 possible task states
-                            for (let x = 0; x < targetProject.taskState.length; x++) {
+                        // Loop though the 3 possible task states
+                        for (let x = 0; x < targetProject.taskState.length; x++) {
+                            // Get sub-items from each Task State
+                            for (let i = 0; i < targetProject.taskState[x].subItems.length; i++) {
 
-                                // Look at what sub items are in each task state and return it to the DOM
-                                for (let i = 0; i < targetProject.taskState[x].subItems.length; i++) {
+                                let targetTask = targetProject.taskState[x].subItems[i]
+                                let identifier = targetTask.progressState
 
-                                    // Get task status from object
-                                    let targetTask = targetProject.taskState[x].subItems[i]
-
-                                    // Update board in DOM
-                                    let identifier = targetTask.progressState
-
-                                    switch (identifier) {
-                                        default:
-                                        case 0:
-                                            noState.appendChild(getCard(targetTask))
-                                            break
-                                        case 1:
-                                            doingState.appendChild(getCard(targetTask))
-                                            break
-                                        case 2:
-                                            doneState.appendChild(getCard(targetTask))
-                                            break
-                                    }
+                                switch (identifier) {
+                                    default:
+                                    case 0:
+                                        noState.appendChild(getCard(targetTask))
+                                        break
+                                    case 1:
+                                        doingState.appendChild(getCard(targetTask))
+                                        break
+                                    case 2:
+                                        doneState.appendChild(getCard(targetTask))
+                                        break
                                 }
                             }
                         }
-                        getTaskData()
                     }
-                    populateStatusAreas()
+                    return {
+                        getTaskData
+                    }
                 }
                 return {
-                    getProjectTitle,
-                    showStatusBoards
-                }
+                    addProjectData,
+                    showStatusAreas,
+                    popStatusBoards
+                    }
             }
-            populateProject().getProjectTitle()
-            populateProject().showStatusBoards()
+            return {
+                selectProject,
+                pop: popProject,
+            }
             }
 
         return {
-            showBoardContainer,
-            showProject,
+            addBoardArea,
+            project: showProject,
         }
     }
 
-    const getBoard = (content) => { // Controller Function for calling the separate elements
-        showBoards(content).showBoardContainer()
-        showBoards().showProject()
+    const getBoard = (content) => { // Controller Function
+        // Add project container
+        showBoard(content).addBoardArea()
+
+        // Select which project to view (Will be used later for diff. projects)
+        showBoard().project().selectProject()
+
+        // Populate all data from project
+        showBoard().project().pop().addProjectData()
+        showBoard().project().pop().showStatusAreas()
+        showBoard().project().pop().popStatusBoards()
+        showBoard().project().pop().popStatusBoards().getTaskData()
     }
     return {
      getBoard
