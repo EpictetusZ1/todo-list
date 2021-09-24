@@ -9,7 +9,7 @@ const Test = (() => {
         let todos = []
         let projects = []
 
-        let oneTags = ["Illustrator", "Design"]
+        let oneTags = ["Illustrator", "Design", "It's Lit", "Fitness"]
         let taskOne = new Task("Add Svgs to project", "Pretty Good", 55, 30, oneTags)
 
         let twoTags = ["Import", "Fun Work"]
@@ -25,7 +25,7 @@ const Test = (() => {
         todos.push(taskOne, taskTwo, taskThree, taskFour)
         testBoard.addItems(todos)
 
-        projects.pusclh(testBoard)
+        projects.push(testBoard)
 
         taskOne.updateState(1)
         taskOne.updateTags("Stylin")

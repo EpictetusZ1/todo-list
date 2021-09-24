@@ -2,9 +2,11 @@ import GetStorage from "../typeController/storageController";
 import Help from "../helper";
 import GetTags from "./populateTags";
 
+import GetTaskData from "./handleNewTask";
+
 const AddContent = (()=> {
 
-    // This is the only call to Board and Task items
+    // This is the only call to Board obj and its Tasks Obj
     const elements = GetStorage
 
     // All DOM methods ref the below which is the ONE 'Project' Obj.
@@ -63,54 +65,71 @@ const AddContent = (()=> {
                 }
 
                 const popStatusBoards = () => {
+                    const noState = document.getElementById(`state-0-${targetProject.refNum}`)
+                    const doingState = document.getElementById(`state-1-${targetProject.refNum}`)
+                    const doneState = document.getElementById(`state-2-${targetProject.refNum}`)
+
+                    const addTaskBtn = (state, stateID) => {
+
+                        let plusSign = Help.makeEl("p", {
+                            class: "plus-sign"
+                        }, "+")
+
+                        let taskText = Help.makeEl("p", {
+                            class: "add-task"
+                        }, "New")
+
+
+                        let taskBtnContainer = Help.makeEl("span", {
+                            class: "add-task-container",
+                        }, taskText, plusSign)
+
+                        taskBtnContainer.addEventListener("click", () => GetTaskData.showForm(stateID))
+
+                        state.appendChild(taskBtnContainer)
+                    }
+
+                    const makeCard = (target) =>  {
+                        let date = Help.makeEl("p",{
+                            class: "date-title"
+                        }, "Created: ")
+
+                        let dateContainer = Help.makeEl("div", {
+                            class: "date-container"
+                        }, date)
+
+                        let descText = Help.makeEl("p", {
+                            class: "desc-text"
+                        }, target.desc)
+
+                        let descContainer = Help.makeEl("div", {
+                            class: "desc-container"
+                        }, descText)
+
+                        // Call return will array of task tags
+                        let tagContainer = Help.makeEl("div", {
+                            class: "tag-container"
+                        }, ...GetTags.createTag(target))
+
+                        let unChecked = Help.makeEl("img", {
+                            src: target.imgSrc,
+                            class: "check"
+                        })
+
+                        let title =  Help.makeEl("p", {
+                            class: "task-title"
+                        }, target.name)
+
+                        let titleContainer = Help.makeEl("div", {
+                            class: "card-title-container"
+                        }, unChecked, title)
+
+                        return Help.makeEl("div", { // Return final Card
+                            class: `task-card task-${target.taskID}`
+                        }, titleContainer, tagContainer, descContainer, dateContainer)
+                    }
 
                     const getTaskData = () => {
-                        const noState = document.getElementById(`state-0-${targetProject.refNum}`)
-                        const doingState = document.getElementById(`state-1-${targetProject.refNum}`)
-                        const doneState = document.getElementById(`state-2-${targetProject.refNum}`)
-
-                        const getCard = (target) =>  {
-
-                            let date = Help.makeEl("p",{
-                                class: "date-text"
-                            }, "Created: ")
-
-                            let dateContainer = Help.makeEl("div", {
-                                class: "date-container"
-                            }, date)
-
-
-                            let descText = Help.makeEl("p", {
-                                class: "desc-text"
-                            }, target.desc)
-
-                            let descContainer = Help.makeEl("div", {
-                                class: "desc-container"
-                            }, descText)
-
-                            // Call will be to an array of task tags
-                            let tagContainer = Help.makeEl("div", {
-                                class: "tag-container"
-                            }, ...GetTags.createTag(target))
-
-                            let unChecked = Help.makeEl("img", {
-                                src: target.imgSrc,
-                                class: "check"
-                            })
-
-                            let title =  Help.makeEl("p", {
-                                class: "task-title"
-                            }, target.name)
-
-                            let titleContainer = Help.makeEl("div", {
-                                class: "card-title-container"
-                            }, unChecked, title)
-
-                            return Help.makeEl("div", { // Card element
-                                class: `task-card task-${target.taskID}`
-                            }, titleContainer, tagContainer, descContainer, dateContainer)
-                        }
-
                         // Loop though the 3 possible task states
                         for (let x = 0; x < targetProject.taskState.length; x++) {
                             // Get sub-items from each Task State
@@ -121,26 +140,31 @@ const AddContent = (()=> {
                                 switch (targetTask.progressState) {
                                     default:
                                     case 0:
-                                        noState.appendChild(getCard(targetTask))
+                                        noState.appendChild( makeCard(targetTask) )
                                         break
                                     case 1:
-                                        doingState.appendChild(getCard(targetTask))
+                                        doingState.appendChild( makeCard(targetTask) )
                                         break
                                     case 2:
-                                        doneState.appendChild(getCard(targetTask))
+                                        doneState.appendChild( makeCard(targetTask) )
                                         break
                                 }
                             }
                         }
+                        addTaskBtn(noState, 0)
+                        addTaskBtn(doingState, 1)
+                        addTaskBtn(doneState, 2)
                     }
+
                     return {
-                        getTaskData
+                        getTaskData,
                     }
                 }
+
                 return {
                     addProjectData,
                     showStatusAreas,
-                    popStatusBoards
+                    popStatusBoards,
                     }
             }
             return {
@@ -165,7 +189,13 @@ const AddContent = (()=> {
         showBoard().project().pop().addProjectData()
         showBoard().project().pop().showStatusAreas()
         showBoard().project().pop().popStatusBoards()
+
+        // Loops through each project status, creates cards and adds them to HTML
         showBoard().project().pop().popStatusBoards().getTaskData()
+
+        // Add the ADD BTN to tasks here as each status sections last child. ^^ Above
+
+        // TODO: Add event listeners to DOM elements here AFTER they have been created
     }
     return {
      getBoard
