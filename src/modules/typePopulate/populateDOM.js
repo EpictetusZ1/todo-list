@@ -69,7 +69,7 @@ const AddContent = (()=> {
                     const doingState = document.getElementById(`state-1-${targetProject.refNum}`)
                     const doneState = document.getElementById(`state-2-${targetProject.refNum}`)
 
-                    const addTaskBtn = (state, stateID) => {
+                    const addTaskBtn = (state, stateID, parentID) => {
 
                         let plusSign = Help.makeEl("p", {
                             class: "plus-sign"
@@ -84,7 +84,7 @@ const AddContent = (()=> {
                             class: "add-task-container",
                         }, taskText, plusSign)
 
-                        taskBtnContainer.addEventListener("click", () => GetTaskData.showForm(stateID))
+                        taskBtnContainer.addEventListener("click", () => GetTaskData.showForm(state, stateID, targetProject.refNum))
 
                         state.appendChild(taskBtnContainer)
                     }

@@ -1,6 +1,6 @@
 import Help from "../helper";
 
-// Responsible for loading the DOM el. to HTML, for initial page view
+// Responsible for loading base background and NAV into DOM and HTML
 const InitView = (()=> {
 
     const loadNav = (content) => {
