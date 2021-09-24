@@ -1,4 +1,6 @@
 import Help from "../helper";
+import handleNewTask from "../typeController/hangleNewTask";
+import HandleTask from "../typeController/hangleNewTask";
 
 const GetTaskData = (() => {
     let formDisplayed = false
@@ -6,7 +8,7 @@ const GetTaskData = (() => {
     const showForm = (parentDiv, stateID, projectRefNum) => {
 
         const populateForm = () => {
-            // taskID, ParentRed (projectRefNum), progressState = STATEID
+            // taskID, ParentRed (projectRefNum), progressState = stateID
 
             const getBtn = () => {
                 let btn = Help.makeEl("button", {
@@ -86,18 +88,31 @@ const GetTaskData = (() => {
             id: "form-container"
             }, formTitle, populateForm())
 
-        const radioForm = (condition) => {
-            const formEl = document.getElementById("form-container")
+        const onSubmit = () => {
+            const submitForm = () => {
+                const formEl = document.getElementById("form-container")
+                const taskForm = document.getElementById("taskForm")
+                taskForm.addEventListener("submit", (e) => {
+
+                    e.preventDefault()
+                    HandleTask.makeTask(taskForm)
+                    taskForm.reset()
+                    formEl.remove()
+                })
+            }
+            const radioForm = (condition) => {
                 if (!condition) {
                     formDisplayed = true
                     parentDiv.appendChild(formContainer)
+                    submitForm()
+                    formDisplayed = false
                 } else {
-                    formEl.remove()
                     formDisplayed = false
                 }
+            }
+            radioForm(formDisplayed)
         }
-        radioForm(formDisplayed)
-
+        onSubmit()
     }
     return {
         showForm

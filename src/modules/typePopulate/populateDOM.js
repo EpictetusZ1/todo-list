@@ -2,7 +2,7 @@ import GetStorage from "../typeController/storageController";
 import Help from "../helper";
 import GetTags from "./populateTags";
 
-import GetTaskData from "./handleNewTask";
+import GetTaskData from "./populateForm";
 
 const AddContent = (()=> {
 
