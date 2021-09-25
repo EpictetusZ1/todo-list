@@ -81,7 +81,6 @@ const AddContent = (()=> {
                             class: "add-task"
                         }, "New")
 
-
                         let taskBtnContainer = Help.makeEl("span", {
                             class: "add-task-container",
                         }, taskText, plusSign)
@@ -186,24 +185,24 @@ const AddContent = (()=> {
         const doingState = document.getElementById(`state-1-${targetProject.refNum}`)
         const doneState = document.getElementById(`state-2-${targetProject.refNum}`)
 
-       let result = showBoard().project().pop().popStatusBoards().makeCard(newTask)
+        let noStateRef = noState.querySelector(".add-task-container").closest("span")
+        let doingStateRef = doingState.querySelector(".add-task-container").closest("span")
+        let doneStateRef = doneState.querySelector(".add-task-container").closest("span")
 
-
+        let result = showBoard().project().pop().popStatusBoards().makeCard(newTask)
 
         switch (id) {
             default:
             case 0:
-                noState.appendChild(result)
+                noState.insertBefore(result, noStateRef)
                 break
             case 1:
-                doingState.appendChild(result)
+                doingState.insertBefore(result, doingStateRef)
                 break
             case 2:
-                doneState.appendChild(result)
+                doneState.insertBefore(result, doneStateRef)
                 break
-
         }
-
     }
 
     const getBoard = (content) => { // Controller Function
