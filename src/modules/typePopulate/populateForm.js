@@ -1,5 +1,4 @@
 import Help from "../helper";
-import handleNewTask from "../typeController/hangleNewTask";
 import HandleTask from "../typeController/hangleNewTask";
 
 const GetTaskData = (() => {
@@ -92,25 +91,27 @@ const GetTaskData = (() => {
             const submitForm = () => {
                 const formEl = document.getElementById("form-container")
                 const taskForm = document.getElementById("taskForm")
-                taskForm.addEventListener("submit", (e) => {
 
+                taskForm.addEventListener("submit", (e) => {
                     e.preventDefault()
-                    HandleTask.makeTask(taskForm)
+                    HandleTask.makeTask(taskForm, stateID, projectRefNum)
                     taskForm.reset()
                     formEl.remove()
                 })
             }
+
             const radioForm = (condition) => {
                 if (!condition) {
                     formDisplayed = true
                     parentDiv.appendChild(formContainer)
                     submitForm()
-                    formDisplayed = false
+                    return formDisplayed = false
                 } else {
-                    formDisplayed = false
+                    return formDisplayed = false
                 }
             }
             radioForm(formDisplayed)
+
         }
         onSubmit()
     }

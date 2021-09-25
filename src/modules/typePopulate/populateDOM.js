@@ -4,6 +4,8 @@ import GetTags from "./populateTags";
 
 import GetTaskData from "./populateForm";
 
+import HandleTask from "../typeController/hangleNewTask";
+
 const AddContent = (()=> {
 
     // This is the only call to Board obj and its Tasks Obj
@@ -151,12 +153,13 @@ const AddContent = (()=> {
                                 }
                             }
                         }
-                        addTaskBtn(noState, 0)
-                        addTaskBtn(doingState, 1)
-                        addTaskBtn(doneState, 2)
+                        addTaskBtn(noState, 0, targetProject.refNum)
+                        addTaskBtn(doingState, 1, targetProject.refNum)
+                        addTaskBtn(doneState, 2, targetProject.refNum)
                     }
 
                     return {
+                        makeCard,
                         getTaskData,
                     }
                 }
@@ -178,6 +181,31 @@ const AddContent = (()=> {
         }
     }
 
+    const updateBoard = (id, newTask) => {
+        const noState = document.getElementById(`state-0-${targetProject.refNum}`)
+        const doingState = document.getElementById(`state-1-${targetProject.refNum}`)
+        const doneState = document.getElementById(`state-2-${targetProject.refNum}`)
+
+       let result = showBoard().project().pop().popStatusBoards().makeCard(newTask)
+
+
+
+        switch (id) {
+            default:
+            case 0:
+                noState.appendChild(result)
+                break
+            case 1:
+                doingState.appendChild(result)
+                break
+            case 2:
+                doneState.appendChild(result)
+                break
+
+        }
+
+    }
+
     const getBoard = (content) => { // Controller Function
         // Add project container
         showBoard(content).addBoardArea()
@@ -196,9 +224,12 @@ const AddContent = (()=> {
         // Add the ADD BTN to tasks here as each status sections last child. ^^ Above
 
         // TODO: Add event listeners to DOM elements here AFTER they have been created
+
+
     }
     return {
-     getBoard
+        getBoard,
+        updateBoard
     }
 
 })()

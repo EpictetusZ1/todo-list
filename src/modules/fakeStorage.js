@@ -9,17 +9,21 @@ const Test = (() => {
         let todos = []
         let projects = []
 
+        let testBoard = new ProjectBoard("Default Project", "September 21")
+
+        let ref = testBoard.refNum
+
         let oneTags = ["Illustrator", "Design", "It's Lit", "Fitness"]
-        let taskOne = new Task("Add Svgs to project", "Pretty Good", 55, 30, oneTags)
+        let taskOne = new Task("Add Svgs to project", "Pretty Good", ref, oneTags)
 
         let twoTags = ["Import", "Fun Work"]
-        let taskTwo = new Task("Create controller module", "Not Bad", 56, 30, twoTags)
+        let taskTwo = new Task("Create controller module", "Not Bad", ref, twoTags)
 
-        let taskThree = new Task("Handle ALL the modules", "Could be worse", 57, 30)
+        let taskThree = new Task("Handle ALL the modules", "Could be worse", ref)
 
-        let taskFour = new Task("Get it done", "The best", 58, 30)
+        let taskFour = new Task("Get it done", "The best",  ref)
 
-        let testBoard = new ProjectBoard("Default Project", "September 21", 30)
+
 
 
         todos.push(taskOne, taskTwo, taskThree, taskFour)

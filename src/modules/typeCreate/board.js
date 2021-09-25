@@ -9,10 +9,14 @@ export class ProjectBoard {
         {code: 1, status: "Doing", subItems: []},
         {code: 2, status: "Done", subItems: []},
         ]
-    constructor(title, dateCreated, refNum) {
+    constructor(title, dateCreated) {
         this.title = title
         this.dateCreated = dateCreated
-        this.refNum = refNum
+        this.refNum = this.assignRefNum()
+    }
+
+    assignRefNum() {
+       return Math.floor(100 + (Math.random() * 100) + 1)
     }
 
     assignState(item) {
