@@ -7,7 +7,6 @@ const GetTaskData = (() => {
     const showForm = (parentDiv, stateID, projectRefNum) => {
 
         const populateForm = () => {
-            // taskID, ParentRed (projectRefNum), progressState = stateID
 
             const getBtn = () => {
                 let btn = Help.makeEl("button", {

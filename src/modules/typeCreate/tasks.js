@@ -33,7 +33,7 @@ export class Task {
     }
 
     get getTags() {
-        return this.tags
+        return this.tags.split(',')
     }
 
 }
