@@ -15,6 +15,10 @@ export class ProjectBoard {
         this.refNum = this.assignRefNum()
     }
 
+    getStuff() {
+        return this.title + "Called from class method"
+    }
+
     assignRefNum() {
        return Math.floor(100 + (Math.random() * 100) + 1)
     }
@@ -42,14 +46,10 @@ export class ProjectBoard {
 
     addItems(arr) { // Add tasks to their appropriate parent project
         for (let i = 0; i < arr.length; i++) {
-            if (arr[i].parentRef === this.refNum) {
-                this.items.push(arr[i])
+            this.items.push(arr[i])
 
-                // Assign Task Item a status state
-                this.assignState(arr[i])
-            } else {
-                console.log("Error at: " + arr[i])
-            }
+            // Assign Task Item a status state
+            this.assignState(arr[i])
         }
     }
 }
