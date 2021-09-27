@@ -3,7 +3,6 @@
 import {Task} from "./typeCreate/tasks";
 import {ProjectBoard} from "./typeCreate/board";
 
-// Here will be where the objects are created from the DOM FORMDATA obj. later
 const Test = (() => {
     const alpha = () => {
         let todos = []
@@ -26,7 +25,6 @@ const Test = (() => {
 
         todos.push(taskOne, taskTwo, taskThree, taskFour)
         testBoard.addItems(todos)
-
         projects.push(testBoard)
 
         taskOne.updateState(1)
@@ -34,7 +32,6 @@ const Test = (() => {
 
         taskThree.updateState(0)
         taskFour.updateState(2)
-
         return projects
     }
     return {

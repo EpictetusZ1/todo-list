@@ -5,7 +5,7 @@ import populateDOM from "../typePopulate/populateDOM";
 
 const HandleTask = (() => {
 
-    // Parameter 'values' is an array of Form data
+    // Parameter 'values' is an array (Form data)
     const makeTask = (formValue, stateID, projectRefNum) => {
 
         let formValues = new FormData(formValue)

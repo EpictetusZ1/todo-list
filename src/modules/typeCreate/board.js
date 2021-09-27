@@ -19,6 +19,10 @@ export class ProjectBoard {
        return Math.floor(100 + (Math.random() * 100) + 1)
     }
 
+    setLocalStorageKey() {
+        return this.refNum
+    }
+
     assignState(item) {
         // Assign task items to sub item arrays
         switch (item.progressState) {

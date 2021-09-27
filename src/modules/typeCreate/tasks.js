@@ -23,6 +23,7 @@ export class Task {
         if (int === 0 || int === 1) {
             return this.progressState = int
         } else {
+            // TODO: Separate this into its own method
             this.imgSrc = check
             return this.progressState = int;
         }

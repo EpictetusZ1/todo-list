@@ -4,11 +4,9 @@ import GetTags from "./populateTags";
 
 import GetTaskData from "./populateForm";
 
-import HandleTask from "../typeController/hangleNewTask";
-
 const AddContent = (()=> {
 
-    // This is the only call to Board obj and its Tasks Obj
+    // This is the only call to the Board Project
     const elements = GetStorage
 
     // All DOM methods ref the below which is the ONE 'Project' Obj.
@@ -219,13 +217,8 @@ const AddContent = (()=> {
 
         // Loops through each project status, creates cards and adds them to HTML
         showBoard().project().pop().popStatusBoards().getTaskData()
-
-        // Add the ADD BTN to tasks here as each status sections last child. ^^ Above
-
-        // TODO: Add event listeners to DOM elements here AFTER they have been created
-
-
     }
+
     return {
         getBoard,
         updateBoard
