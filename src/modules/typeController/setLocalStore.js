@@ -87,9 +87,13 @@ const Storage = (() => {
                 }
             }
             checkTaskParent()
-            console.log(targetProject)
+            let storageArray = []
+            storageArray.push(targetProject)
+            return storageArray
         }
-        getTasksInProject()
+        return {
+            getTasksInProject
+        }
     }
 
     return {

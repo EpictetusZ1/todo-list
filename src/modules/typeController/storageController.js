@@ -3,14 +3,24 @@ import Storage from "./setLocalStore";
 
 // Designed to Hold boards and tasks in local memory
 const GetStorage = (() => {
-    if (localStorage.length === 0) {
+
+    const loadDefaultView = () => {
         Storage.setLocal()
+        let bravo
+        if (localStorage.length > 0) {
+            bravo = Storage.getLocal().getTasksInProject()
+            // clearing local storage for dev.
+            localStorage.clear()
+        }
+
+        return bravo
+
     }
 
-    Storage.getLocal()
+    return {
+        loadDefaultView
+    }
 
-
-    return Test.alpha()
 })()
 
 export default GetStorage

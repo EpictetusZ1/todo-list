@@ -6,8 +6,10 @@ import GetTaskData from "./populateForm";
 
 const AddContent = (()=> {
 
-    // This is the only call to the Board Project
-    const elements = GetStorage
+    const elements = GetStorage.loadDefaultView()
+    console.log(elements)
+    // Test From Local Storage
+
 
     // All DOM methods ref the below which is the ONE 'Project' Obj.
     let targetProject = elements[0]

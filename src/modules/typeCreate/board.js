@@ -15,10 +15,6 @@ export class ProjectBoard {
         this.refNum = this.assignRefNum()
     }
 
-    getStuff() {
-        return this.title + "Called from class method"
-    }
-
     assignRefNum() {
        return Math.floor(100 + (Math.random() * 100) + 1)
     }
