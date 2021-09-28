@@ -1,11 +1,9 @@
 import Test from "../fakeStorage";
 import {ProjectBoard} from "../typeCreate/board";
+import {Task} from "../typeCreate/tasks";
 
 
 const Storage = (() => {
-
-    // Local Storage Needs to Hold a array of BOARD ITEMS.
-    // Need to parse the boar items and sub items out of local storage
 
     const setLocal = () => {
         let testData = Test.alpha()
@@ -31,7 +29,8 @@ const Storage = (() => {
     }
 
     const getLocal = () => {
-        const parseLocal = () => {
+
+        const getStorageString = () => {
             let keys = Object.keys(localStorage)
             let boardItem
             for (let i = 0; i < localStorage.length; i++) {
@@ -40,7 +39,7 @@ const Storage = (() => {
             return JSON.parse(boardItem)
         }
 
-        const mapToClassBoard = (JSONData) => {
+        const getProjectBoards = (JSONData) => {
             let copy = Object.assign(JSONData, ProjectBoard)
 
             const deepClone = (copy) => {
@@ -48,7 +47,7 @@ const Storage = (() => {
                 let date = copy.dateCreated
                 let refNum = copy.refNum
                 let state = copy.taskState
-                const description = copy.desc
+                let description = copy.desc
                 return [title, date, refNum, state, description]
             }
 
@@ -59,25 +58,43 @@ const Storage = (() => {
                 }
                 return items
             }
-
             let newProject = new ProjectBoard(...deepClone(copy))
             newProject.addItems( mapItems() )
 
-            console.log(newProject)
-            console.log(newProject instanceof ProjectBoard)
+            return newProject
         }
 
-        mapToClassBoard( parseLocal() )
+        const getTasksInProject = () => {
+            let targetProject = getProjectBoards( getStorageString() )
 
-    }
+            const deepCloneTask = (copy) => {
+                let name = copy.name
+                let desc = copy.desc
+                let parentRef = targetProject.refNum
+                let taskID = copy.taskID
+                let tags = copy.tags
+                return [name, desc, parentRef, tags, taskID]
+            }
 
-    if (localStorage.length !== 0) {
-        getLocal()
-        localStorage.clear()
+            const checkTaskParent = () => {
+                let targetItems = targetProject.items
+                for (let i = 0; i < targetItems.length; i++) {
+                    if (targetItems[i].parentRef === targetProject.refNum) {
+                        let copy = Object.assign(targetProject.items[i], Task)
+                        let newTask = new Task(...deepCloneTask(copy))
+                        targetProject.assignState(newTask)
+                    }
+                }
+            }
+            checkTaskParent()
+            console.log(targetProject)
+        }
+        getTasksInProject()
     }
 
     return {
-       setLocal
+        setLocal,
+        getLocal
     }
 
 })()

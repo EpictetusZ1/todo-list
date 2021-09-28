@@ -3,9 +3,12 @@ import Storage from "./setLocalStore";
 
 // Designed to Hold boards and tasks in local memory
 const GetStorage = (() => {
-    // populateDOM file is set up to accept an Array of Board Objects
+    if (localStorage.length === 0) {
+        Storage.setLocal()
+    }
 
-    Storage.setLocal()
+    Storage.getLocal()
+
 
     return Test.alpha()
 })()
