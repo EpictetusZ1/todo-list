@@ -7,12 +7,47 @@ import GetTaskData from "./populateForm";
 const AddContent = (()=> {
 
     const elements = GetStorage.loadDefaultView()
-    console.log(elements)
-    // Test From Local Storage
-
-
     // All DOM methods ref the below which is the ONE 'Project' Obj.
-    let targetProject = elements[0]
+
+
+    const determineView = (ref = 0) => {
+        if (ref === 0) {
+            return elements[0]
+        } else {
+            for (let i = 0; i <= elements.length; i++) {
+                if (elements[i].refNum === ref) {
+                    console.log(elements[i])
+                    return elements[i]
+                }
+            }
+        }
+    }
+    let targetProject = determineView()
+
+    const popNavMenu = () => {
+        const menu = document.getElementById("menu-element")
+        let menuTextArr = []
+        const populateMenu = (i) => {
+            let menuItem = Help.makeEl("p", {
+                class: "menu-text",
+                data: `${elements[i].refNum}`
+            }, elements[i].title)
+            menuTextArr.push(menuItem)
+            return menuItem
+        }
+
+        const getRefNum = (item) => {
+            let ref = parseInt(item.getAttribute("data"))
+        }
+
+        for (let i = 0; i < elements.length; i++) {
+            menu.appendChild( populateMenu(i) )
+        }
+        menuTextArr.forEach((item) => {
+            item.addEventListener("click", () => getRefNum(item))
+        })
+
+    }
 
     const showBoard = (content) => {
         const addBoardArea = () => {
@@ -219,6 +254,9 @@ const AddContent = (()=> {
 
         // Loops through each project status, creates cards and adds them to HTML
         showBoard().project().pop().popStatusBoards().getTaskData()
+
+        // Populates Board Project Titles to Nav
+        popNavMenu()
     }
 
     return {

@@ -32,11 +32,14 @@ const Storage = (() => {
 
         const getStorageString = () => {
             let keys = Object.keys(localStorage)
+            let boardArr = []
             let boardItem
             for (let i = 0; i < localStorage.length; i++) {
                 boardItem = localStorage.getItem(keys[i])
+                boardArr.push(JSON.parse(boardItem))
             }
-            return JSON.parse(boardItem)
+
+            return boardArr
         }
 
         const getProjectBoards = (JSONData) => {
@@ -65,31 +68,38 @@ const Storage = (() => {
         }
 
         const getTasksInProject = () => {
-            let targetProject = getProjectBoards( getStorageString() )
+            let boards = getStorageString()
+            let storageArray = []
+            for (let i = 0; i < boards.length; i++) {
+                let targetProject = getProjectBoards(boards[i])
 
-            const deepCloneTask = (copy) => {
-                let name = copy.name
-                let desc = copy.desc
-                let parentRef = targetProject.refNum
-                let taskID = copy.taskID
-                let tags = copy.tags
-                return [name, desc, parentRef, tags, taskID]
-            }
 
-            const checkTaskParent = () => {
-                let targetItems = targetProject.items
-                for (let i = 0; i < targetItems.length; i++) {
-                    if (targetItems[i].parentRef === targetProject.refNum) {
-                        let copy = Object.assign(targetProject.items[i], Task)
-                        let newTask = new Task(...deepCloneTask(copy))
-                        targetProject.assignState(newTask)
+                const deepCloneTask = (copy) => {
+                    let name = copy.name
+                    let desc = copy.desc
+                    let parentRef = targetProject.refNum
+                    let taskID = copy.taskID
+                    let tags = copy.tags
+                    return [name, desc, parentRef, tags, taskID]
+                }
+
+                const checkTaskParent = () => {
+                    let targetItems = targetProject.items
+                    for (let i = 0; i < targetItems.length; i++) {
+                        if (targetItems[i].parentRef === targetProject.refNum) {
+                            let copy = Object.assign(targetProject.items[i], Task)
+                            let newTask = new Task(...deepCloneTask(copy))
+                            targetProject.assignState(newTask)
+                        }
                     }
                 }
+
+                checkTaskParent()
+
+                storageArray.push(targetProject)
             }
-            checkTaskParent()
-            let storageArray = []
-            storageArray.push(targetProject)
             return storageArray
+
         }
         return {
             getTasksInProject

@@ -1,4 +1,3 @@
-import Test from "../fakeStorage";
 import Storage from "./setLocalStore";
 
 // Designed to Hold boards and tasks in local memory
@@ -9,13 +8,11 @@ const GetStorage = (() => {
         let bravo
         if (localStorage.length > 0) {
             bravo = Storage.getLocal().getTasksInProject()
-            // clearing local storage for dev.
-            localStorage.clear()
         }
-
         return bravo
 
     }
+    localStorage.clear()
 
     return {
         loadDefaultView

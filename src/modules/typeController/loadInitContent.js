@@ -1,17 +1,17 @@
 import Help from "../helper";
 
-// Responsible for loading base background and NAV into DOM and HTML
+// Responsible for loading base background and Nav elements into DOM and HTML
 const InitView = (()=> {
 
     const loadNav = (content) => {
-        // Create Hamburger Menu in DOM
         const hamburger = (() => {
             const showHam = () => {
                 const hamBtn = Help.makeEl("div", {
                     class: "menu-btn-burger"
                 })
                 return Help.makeEl("div", {
-                    class: "menu-btn"
+                    class: "menu-btn",
+                    id: "main-menu"
                 }, hamBtn)
             }
 
@@ -55,7 +55,27 @@ const InitView = (()=> {
             hamburger.animateHam()
         }
 
+        const makeMenu = () => {
+            let menu = Help.makeEl("div", {
+                class: "menu",
+                id: "menu-element"
+            })
+            content.appendChild(menu)
+        }
+
+        const setListener = () => {
+            makeMenu()
+            const mainMenu = document.getElementById("main-menu")
+            const menuEl = document.getElementById("menu-element")
+
+            const showMenu = () => {
+                menuEl.classList.toggle("menu-active")
+            }
+            mainMenu.addEventListener("click", () => showMenu())
+        }
+
         addItems()
+        setListener()
     }
 
     return {

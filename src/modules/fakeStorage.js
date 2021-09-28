@@ -32,6 +32,15 @@ const Test = (() => {
 
         taskThree.updateState(0)
         taskFour.updateState(2)
+
+
+        let boardTwo = new ProjectBoard("Project Two Title", "September 28")
+        let twoRef = boardTwo.refNum
+        let tagTwo = ["Nope", "Yes"]
+        let taskAlpha = new Task("Test Task 2 project 2", "Pretty not decent", twoRef, tagTwo)
+        let twoTasks = [taskAlpha]
+        boardTwo.addItems(twoTasks)
+        projects.push(boardTwo)
         return projects
     }
     return {
