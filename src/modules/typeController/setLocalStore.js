@@ -42,11 +42,16 @@ const Storage = (() => {
 
         const mapToClassBoard = (JSONData) => {
             let copy = Object.assign(JSONData, ProjectBoard)
-            console.log(copy)
 
-            const mapTitle = () =>  copy.title
-            const mapDate = () => copy.dateCreated
-            const mapRef = () => copy.refNum
+            const deepClone = (copy) => {
+                let title = copy.title
+                let date = copy.dateCreated
+                let refNum = copy.refNum
+                let state = copy.taskState
+                const description = copy.desc
+                return [title, date, refNum, state, description]
+            }
+
             const mapItems = () => {
                 let items = []
                 for (let i = 0; i < copy.items.length; i++) {
@@ -54,17 +59,18 @@ const Storage = (() => {
                 }
                 return items
             }
-            const mapState = () => copy.taskState
-            const mapDesc = () => copy.desc
 
-            let newProject = new ProjectBoard(mapTitle(), mapDate(), mapRef(), mapState(), mapDesc())
+            let newProject = new ProjectBoard(...deepClone(copy))
             newProject.addItems( mapItems() )
+
             console.log(newProject)
+            console.log(newProject instanceof ProjectBoard)
         }
 
         mapToClassBoard( parseLocal() )
 
     }
+
     if (localStorage.length !== 0) {
         getLocal()
         localStorage.clear()
