@@ -1,5 +1,4 @@
 import {Task} from "../typeCreate/tasks";
-import {ProjectBoard} from "../typeCreate/board";
 
 import populateDOM from "../typePopulate/populateDOM";
 

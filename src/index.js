@@ -13,6 +13,9 @@ const loadDisplay = () => {
 
         // Function that Loads 'Boards' onto screen
         AddContent.getBoard(content)
+
+        // Populate nav menu dynamically, add event listeners
+        AddContent.updateBoardView()
     }
 
     return {

@@ -8,11 +8,12 @@ const GetStorage = (() => {
         let bravo
         if (localStorage.length > 0) {
             bravo = Storage.getLocal().getTasksInProject()
+            localStorage.clear()
         }
         return bravo
 
     }
-    localStorage.clear()
+
 
     return {
         loadDefaultView

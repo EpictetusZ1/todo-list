@@ -1,3 +1,4 @@
+let increment = -1
 
 export class ProjectBoard {
     title = ""
@@ -9,14 +10,10 @@ export class ProjectBoard {
         {code: 1, status: "Doing", subItems: []},
         {code: 2, status: "Done", subItems: []},
         ]
-    constructor(title, dateCreated) {
+    constructor(title, dateCreated, defaultBoard) {
         this.title = title
         this.dateCreated = dateCreated
-        this.refNum = this.assignRefNum()
-    }
-
-    assignRefNum() {
-       return Math.floor(100 + (Math.random() * 100) + 1)
+        this.refNum = increment++
     }
 
     setLocalStorageKey() {

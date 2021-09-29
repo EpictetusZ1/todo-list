@@ -9,44 +9,18 @@ const AddContent = (()=> {
     const elements = GetStorage.loadDefaultView()
     // All DOM methods ref the below which is the ONE 'Project' Obj.
 
-
-    const determineView = (ref = 0) => {
-        if (ref === 0) {
-            return elements[0]
-        } else {
-            for (let i = 0; i <= elements.length; i++) {
-                if (elements[i].refNum === ref) {
-                    console.log(elements[i])
-                    return elements[i]
-                }
-            }
-        }
-    }
-    let targetProject = determineView()
-
     const popNavMenu = () => {
         const menu = document.getElementById("menu-element")
-        let menuTextArr = []
+        menu.innerHTML = ""
         const populateMenu = (i) => {
-            let menuItem = Help.makeEl("p", {
-                class: "menu-text",
+            return Help.makeEl("p", {
+                class: `menu-text`,
                 data: `${elements[i].refNum}`
             }, elements[i].title)
-            menuTextArr.push(menuItem)
-            return menuItem
         }
-
-        const getRefNum = (item) => {
-            let ref = parseInt(item.getAttribute("data"))
-        }
-
         for (let i = 0; i < elements.length; i++) {
             menu.appendChild( populateMenu(i) )
         }
-        menuTextArr.forEach((item) => {
-            item.addEventListener("click", () => getRefNum(item))
-        })
-
     }
 
     const showBoard = (content) => {
@@ -60,14 +34,16 @@ const AddContent = (()=> {
         const showProject = () => {
             const container = document.querySelector(".board-container")
 
-            const selectProject = () => {
+            const selectProject = (targetProject) => {
                 let project = Help.makeEl("div", {
-                    class: `project-container project-${targetProject.refNum}`
+                    class: `project-container project-${targetProject.refNum}`,
+                    data: `${targetProject.refNum}`
                 })
-                return container.appendChild(project)
+                container.appendChild(project)
+                return targetProject
             }
 
-            const popProject = () => {
+            const popProject = (targetProject) => {
                 const projectArea = document.querySelector(`.project-${targetProject.refNum}`)
 
                 const addProjectData = () => {
@@ -120,7 +96,7 @@ const AddContent = (()=> {
                             class: "add-task-container",
                         }, taskText, plusSign)
 
-                        taskBtnContainer.addEventListener("click", () => GetTaskData.showForm(state, stateID, targetProject.refNum))
+                        taskBtnContainer.addEventListener("click", () => GetTaskData.showForm(state, stateID, parentID))
 
                         state.appendChild(taskBtnContainer)
                     }
@@ -195,6 +171,10 @@ const AddContent = (()=> {
                     return {
                         makeCard,
                         getTaskData,
+                        noState,
+                        doingState,
+                        doneState
+
                     }
                 }
 
@@ -216,15 +196,20 @@ const AddContent = (()=> {
     }
 
     const updateBoard = (id, newTask) => {
-        const noState = document.getElementById(`state-0-${targetProject.refNum}`)
-        const doingState = document.getElementById(`state-1-${targetProject.refNum}`)
-        const doneState = document.getElementById(`state-2-${targetProject.refNum}`)
+
+        let getRefNum = parseInt(document.querySelector(".project-container").getAttribute("data"))
+
+        let targetProject = elements[getRefNum -1]
+
+        let result = showBoard().project().pop(targetProject).popStatusBoards().makeCard(newTask)
+
+        let noState = showBoard().project().pop(targetProject).popStatusBoards().noState
+        let doingState = showBoard().project().pop(targetProject).popStatusBoards().doingState
+        let doneState = showBoard().project().pop(targetProject).popStatusBoards().doneState
 
         let noStateRef = noState.querySelector(".add-task-container").closest("span")
         let doingStateRef = doingState.querySelector(".add-task-container").closest("span")
         let doneStateRef = doneState.querySelector(".add-task-container").closest("span")
-
-        let result = showBoard().project().pop().popStatusBoards().makeCard(newTask)
 
         switch (id) {
             default:
@@ -240,28 +225,57 @@ const AddContent = (()=> {
         }
     }
 
-    const getBoard = (content) => { // Controller Function
+    const getBoard = (content, targetProject = elements[1]) => { // Controller Function
         // Add project container
         showBoard(content).addBoardArea()
 
         // Select which project to view (Will be used later for diff. projects)
-        showBoard().project().selectProject()
+        showBoard().project().selectProject(targetProject)
 
         // Populate all data from project
-        showBoard().project().pop().addProjectData()
-        showBoard().project().pop().showStatusAreas()
-        showBoard().project().pop().popStatusBoards()
+        showBoard().project().pop(targetProject).addProjectData()
+        showBoard().project().pop(targetProject).showStatusAreas()
+        showBoard().project().pop(targetProject).popStatusBoards()
 
         // Loops through each project status, creates cards and adds them to HTML
-        showBoard().project().pop().popStatusBoards().getTaskData()
+        showBoard().project().pop(targetProject).popStatusBoards().getTaskData()
 
         // Populates Board Project Titles to Nav
         popNavMenu()
     }
 
+    const updateBoardView = () => {
+        const addListeners = () => {
+            let menuItems = document.querySelectorAll(".menu-text")
+            menuItems.forEach(item => {
+                item.addEventListener("click", (e) => getData(e))
+            })
+        }
+        addListeners()
+
+        const showDiffBoard = (data) => {
+            const content = document.getElementById("content")
+            // loop through elements and find the one where this.refNum === data
+            for (let i = 0; i < elements.length; i++) {
+                if (elements[i].refNum === parseInt(data)) {
+                    return getBoard(content, elements[i])
+                }
+            }
+        }
+
+        const getData = (e) => {
+            let data = e.target.getAttribute("data")
+            const boardContainer = document.querySelector(".board-container")
+            boardContainer.innerHTML = ""
+            showDiffBoard(data)
+            addListeners()
+        }
+    }
+
     return {
         getBoard,
-        updateBoard
+        updateBoard,
+        updateBoardView
     }
 
 })()
