@@ -11,7 +11,7 @@ const AddContent = (()=> {
 
     const popNavMenu = () => {
         const menu = document.getElementById("menu-element")
-        menu.innerHTML = ""
+        menu.textContent = ""
         const populateMenu = (i) => {
             return Help.makeEl("p", {
                 class: `menu-text`,
@@ -264,9 +264,11 @@ const AddContent = (()=> {
         }
 
         const getData = (e) => {
+            let menu = document.querySelector(".menu")
+            menu.classList.remove("menu-active")
             let data = e.target.getAttribute("data")
             const boardContainer = document.querySelector(".board-container")
-            boardContainer.innerHTML = ""
+            boardContainer.remove()
             showDiffBoard(data)
             addListeners()
         }

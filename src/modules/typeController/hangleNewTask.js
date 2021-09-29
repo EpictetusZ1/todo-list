@@ -13,6 +13,7 @@ const HandleTask = (() => {
 
         newTask.tags = newTask.getTags
         populateDOM.updateBoard(stateID,newTask)
+        //TODO: Update task to be part of parent in Object
     }
 
     return {

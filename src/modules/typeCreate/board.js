@@ -10,7 +10,7 @@ export class ProjectBoard {
         {code: 1, status: "Doing", subItems: []},
         {code: 2, status: "Done", subItems: []},
         ]
-    constructor(title, dateCreated, defaultBoard) {
+    constructor(title, dateCreated) {
         this.title = title
         this.dateCreated = dateCreated
         this.refNum = increment++
