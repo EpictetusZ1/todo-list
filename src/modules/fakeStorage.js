@@ -7,9 +7,9 @@ const Test = (() => {
     const alpha = () => {
         let projects = []
 
-        let testBoard = new ProjectBoard("Default Project", "September 21")
+        let defaultBoard = new ProjectBoard("To Do:", "September 21")
 
-        let ref = testBoard.refNum -1
+        let ref = defaultBoard.refNum
 
         let oneTags = ["Illustrator", "Design", "It's Lit", "Fitness"]
         let taskOne = new Task("Add Svgs to project", "Pretty Good", ref, oneTags)
@@ -23,8 +23,8 @@ const Test = (() => {
         let taskFour = new Task("Get it done", "The best",  ref)
 
         let todos = [taskOne, taskTwo, taskThree, taskFour]
-        testBoard.addItems(todos)
-        projects.push(testBoard)
+        defaultBoard.addItems(todos)
+        projects.push(defaultBoard)
 
         taskOne.updateState(1)
         taskOne.updateTags("Stylin")
@@ -37,9 +37,14 @@ const Test = (() => {
         let twoRef = boardTwo.refNum
         let tagTwo = ["Nope", "Yes"]
         let taskAlpha = new Task("Test Task 2 project 2", "Pretty not decent", twoRef, tagTwo)
-        let twoTasks = [taskAlpha]
+        let taskBravo = new Task("help me fix this", "sometime soon", twoRef)
+
+        let twoTasks = [taskAlpha, taskBravo]
         boardTwo.addItems(twoTasks)
         projects.push(boardTwo)
+
+        taskBravo.updateState(2)
+
 
         return projects
     }

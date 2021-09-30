@@ -5,6 +5,7 @@ const GetStorage = (() => {
 
     const loadDefaultView = () => {
         Storage.setLocal()
+        console.log(localStorage)
         if (localStorage.length > 0) {
              return  Storage.getLocal().getTasksInProject()
         }

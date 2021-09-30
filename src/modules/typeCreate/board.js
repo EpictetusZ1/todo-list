@@ -1,4 +1,4 @@
-let increment = 0
+let increment = 1
 
 export class ProjectBoard {
     title = ""
@@ -9,15 +9,16 @@ export class ProjectBoard {
         {code: 1, status: "Doing", subItems: []},
         {code: 2, status: "Done", subItems: []},
         ]
-    constructor(title, dateCreated) {
+    constructor(title, dateCreated, refNum = increment) {
         this.title = title
         this.dateCreated = dateCreated
-        this.refNum = Math.abs(increment++ - 1)
+        this.refNum = increment++
+        this.storageNum = increment
     }
 
-
     setLocalStorageKey() {
-        return this.refNum
+        increment--
+        return this.storageNum
     }
 
     assignState(item) {

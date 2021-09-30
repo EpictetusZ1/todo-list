@@ -6,8 +6,8 @@ import GetTaskData from "./populateForm";
 
 const AddContent = (()=> {
 
-    const elements = GetStorage.loadDefaultView()
-    // All DOM methods ref the below which is the ONE 'Project' Obj.
+    let elements = GetStorage.loadDefaultView()
+    console.log(elements)
 
     const popNavMenu = () => {
         const menu = document.getElementById("menu-element")
@@ -36,14 +36,14 @@ const AddContent = (()=> {
 
             const selectProject = (targetProject) => {
                 let project = Help.makeEl("div", {
-                    class: `project-container project-${targetProject.refNum - 1}`,
-                    data: `${targetProject.refNum - 1}`
+                    class: `project-container project-${targetProject.refNum}`,
+                    data: `${targetProject.refNum}`
                 })
                 container.appendChild(project)
             }
 
             const popProject = (targetProject) => {
-                const projectArea = document.querySelector(`.project-${targetProject.refNum - 1}`)
+                const projectArea = document.querySelector(`.project-${targetProject.refNum}`)
 
                 const addProjectData = () => {
                     let title = Help.makeEl("p", {
@@ -193,11 +193,9 @@ const AddContent = (()=> {
 
     const updateBoard = (id, newTask) => {
 
-        let getRefNum = document.querySelector(".project-container").getAttribute("data")
+        let getRef = parseInt(document.querySelector(".project-container").getAttribute("data"))
 
-        let targetIndex = elements.indexOf(elements[getRefNum])
-
-        let targetProject = elements[targetIndex]
+        let targetProject = elements[getRef - 1]
 
         let result = showBoard().project().pop(targetProject).popStatusBoards().makeCard(newTask)
 

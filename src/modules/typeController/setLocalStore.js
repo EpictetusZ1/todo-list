@@ -29,13 +29,11 @@ const Storage = (() => {
     }
 
     const updateLocal = (task, ref) => {
-        let targetBoard = testData[ref - 1]
+        let tasks = [task]
+        let targetBoard = testData[ref]
 
-        console.log(ref)
-
-        console.log(targetBoard)
-
-        targetBoard.addItems(task)
+        targetBoard.addItems(tasks)
+        testData.push(targetBoard)
 
         setLocal()
     }
@@ -89,9 +87,8 @@ const Storage = (() => {
                     let name = copy.name
                     let desc = copy.desc
                     let parentRef = targetProject.refNum
-                    let taskID = copy.taskID
-                    let tags = copy.tags
-                    return [name, desc, parentRef, tags, taskID]
+
+                    return [name, desc, parentRef]
                 }
 
                 const checkTaskParent = () => {
