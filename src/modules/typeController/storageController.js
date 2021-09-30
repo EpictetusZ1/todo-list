@@ -5,15 +5,10 @@ const GetStorage = (() => {
 
     const loadDefaultView = () => {
         Storage.setLocal()
-        let bravo
         if (localStorage.length > 0) {
-            bravo = Storage.getLocal().getTasksInProject()
-            localStorage.clear()
+             return  Storage.getLocal().getTasksInProject()
         }
-        return bravo
-
     }
-
 
     return {
         loadDefaultView

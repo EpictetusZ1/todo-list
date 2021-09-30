@@ -5,7 +5,6 @@ import {ProjectBoard} from "./typeCreate/board";
 
 const Test = (() => {
     const alpha = () => {
-        let todos = []
         let projects = []
 
         let testBoard = new ProjectBoard("Default Project", "September 21")
@@ -23,7 +22,7 @@ const Test = (() => {
 
         let taskFour = new Task("Get it done", "The best",  ref)
 
-        todos.push(taskOne, taskTwo, taskThree, taskFour)
+        let todos = [taskOne, taskTwo, taskThree, taskFour]
         testBoard.addItems(todos)
         projects.push(testBoard)
 
@@ -41,6 +40,7 @@ const Test = (() => {
         let twoTasks = [taskAlpha]
         boardTwo.addItems(twoTasks)
         projects.push(boardTwo)
+
         return projects
     }
     return {

@@ -1,9 +1,8 @@
-let increment = -1
+let increment = 0
 
 export class ProjectBoard {
     title = ""
     dateCreated
-    refNum = 0
     items = []
     taskState = [
         {code: 0, status: "No Status", subItems: []},
@@ -13,7 +12,7 @@ export class ProjectBoard {
     constructor(title, dateCreated) {
         this.title = title
         this.dateCreated = dateCreated
-        this.refNum = increment++
+        this.refNum = (increment++ - 1)
     }
 
     setLocalStorageKey() {

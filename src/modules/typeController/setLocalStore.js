@@ -2,12 +2,13 @@ import Test from "../fakeStorage";
 import {ProjectBoard} from "../typeCreate/board";
 import {Task} from "../typeCreate/tasks";
 
-
 const Storage = (() => {
 
-    const setLocal = () => {
-        let testData = Test.alpha()
+    let initMemory = [...Test.alpha()]
+    let testData = []
+    initMemory.forEach(item => testData.push(item))
 
+    const setLocal = () => {
         const setBoardItem = () => {
             const defineItem = (keyVal, propVal) => {
                 localStorage.setItem(keyVal, propVal)
@@ -28,6 +29,16 @@ const Storage = (() => {
         setBoardItem()
     }
 
+    const updateLocal = (task, ref) => {
+        let tasks = [task]
+        let targetBoard = testData[ref]
+
+        targetBoard.addItems(tasks)
+        testData.push(targetBoard)
+
+        setLocal()
+    }
+
     const getLocal = () => {
 
         const getStorageString = () => {
@@ -38,8 +49,7 @@ const Storage = (() => {
                 boardItem = localStorage.getItem(keys[i])
                 boardArr.push(JSON.parse(boardItem))
             }
-
-            return boardArr
+            return boardArr.reverse()
         }
 
         const getProjectBoards = (JSONData) => {
@@ -108,7 +118,8 @@ const Storage = (() => {
 
     return {
         setLocal,
-        getLocal
+        getLocal,
+        updateLocal
     }
 
 })()

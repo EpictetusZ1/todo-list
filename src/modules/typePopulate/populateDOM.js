@@ -36,15 +36,14 @@ const AddContent = (()=> {
 
             const selectProject = (targetProject) => {
                 let project = Help.makeEl("div", {
-                    class: `project-container project-${targetProject.refNum}`,
-                    data: `${targetProject.refNum}`
+                    class: `project-container project-${targetProject.refNum - 1}`,
+                    data: `${targetProject.refNum - 1}`
                 })
                 container.appendChild(project)
-                return targetProject
             }
 
             const popProject = (targetProject) => {
-                const projectArea = document.querySelector(`.project-${targetProject.refNum}`)
+                const projectArea = document.querySelector(`.project-${targetProject.refNum - 1}`)
 
                 const addProjectData = () => {
                     let title = Help.makeEl("p", {
@@ -167,17 +166,14 @@ const AddContent = (()=> {
                         addTaskBtn(doingState, 1, targetProject.refNum)
                         addTaskBtn(doneState, 2, targetProject.refNum)
                     }
-
                     return {
                         makeCard,
                         getTaskData,
                         noState,
                         doingState,
                         doneState
-
                     }
                 }
-
                 return {
                     addProjectData,
                     showStatusAreas,
@@ -188,7 +184,7 @@ const AddContent = (()=> {
                 selectProject,
                 pop: popProject,
             }
-            }
+        }
         return {
             addBoardArea,
             project: showProject,
@@ -197,9 +193,11 @@ const AddContent = (()=> {
 
     const updateBoard = (id, newTask) => {
 
-        let getRefNum = parseInt(document.querySelector(".project-container").getAttribute("data"))
+        let getRefNum = document.querySelector(".project-container").getAttribute("data")
 
-        let targetProject = elements[getRefNum -1]
+        let targetIndex = elements.indexOf(elements[getRefNum])
+
+        let targetProject = elements[targetIndex]
 
         let result = showBoard().project().pop(targetProject).popStatusBoards().makeCard(newTask)
 
@@ -225,7 +223,9 @@ const AddContent = (()=> {
         }
     }
 
-    const getBoard = (content, targetProject = elements[1]) => { // Controller Function
+    const getBoard = (content, targetProject = elements[0]) => {
+
+        console.log(elements[0])
         // Add project container
         showBoard(content).addBoardArea()
 
@@ -255,7 +255,7 @@ const AddContent = (()=> {
 
         const showDiffBoard = (data) => {
             const content = document.getElementById("content")
-            // loop through elements and find the one where this.refNum === data
+            // loop through elements and find where element.refNum === data
             for (let i = 0; i < elements.length; i++) {
                 if (elements[i].refNum === parseInt(data)) {
                     return getBoard(content, elements[i])

@@ -1,4 +1,5 @@
 import {Task} from "../typeCreate/tasks";
+import Storage from "./setLocalStore";
 
 import populateDOM from "../typePopulate/populateDOM";
 
@@ -11,9 +12,12 @@ const HandleTask = (() => {
         let values = [...formValues.values()]
         let newTask = new Task(values[0], values[1], projectRefNum, values[2], stateID)
 
+
         newTask.tags = newTask.getTags
-        populateDOM.updateBoard(stateID,newTask)
-        //TODO: Update task to be part of parent in Object
+
+        populateDOM.updateBoard(stateID, newTask)
+
+        Storage.updateLocal(newTask, projectRefNum)
     }
 
     return {
