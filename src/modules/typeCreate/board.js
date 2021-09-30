@@ -12,8 +12,9 @@ export class ProjectBoard {
     constructor(title, dateCreated) {
         this.title = title
         this.dateCreated = dateCreated
-        this.refNum = (increment++ - 1)
+        this.refNum = Math.abs(increment++ - 1)
     }
+
 
     setLocalStorageKey() {
         return this.refNum
@@ -32,7 +33,7 @@ export class ProjectBoard {
                 this.taskState[2].subItems.push(item)
                 break
             default:
-                console.log(this.taskState[0])
+                console.log("Error at: ", this.taskState[0])
         }
     }
 

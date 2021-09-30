@@ -225,7 +225,6 @@ const AddContent = (()=> {
 
     const getBoard = (content, targetProject = elements[0]) => {
 
-        console.log(elements[0])
         // Add project container
         showBoard(content).addBoardArea()
 

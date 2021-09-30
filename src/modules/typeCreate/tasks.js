@@ -1,12 +1,11 @@
 import check from "../../assets/icons/checkSVG/checked.svg"
 import notCheck from "../../assets/icons/checkSVG/unChecked.svg"
 
-let increment = 0
+let taskInc = 0
 
 export class Task {
     name = ""
     desc = ""
-    parentRef = 100
     taskID = 0
     tags = []
     progressState = 0
@@ -16,7 +15,7 @@ export class Task {
         this.desc = desc
         this.parentRef = parentRef
         this.tags = tags
-        this.taskID = increment++
+        this.taskID = taskInc++
     }
 
     updateState(int) {

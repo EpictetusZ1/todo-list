@@ -4,9 +4,8 @@ import {Task} from "../typeCreate/tasks";
 
 const Storage = (() => {
 
-    let initMemory = [...Test.alpha()]
-    let testData = []
-    initMemory.forEach(item => testData.push(item))
+    let testData = [...Test.alpha()]
+
 
     const setLocal = () => {
         const setBoardItem = () => {
@@ -30,11 +29,13 @@ const Storage = (() => {
     }
 
     const updateLocal = (task, ref) => {
-        let tasks = [task]
-        let targetBoard = testData[ref]
+        let targetBoard = testData[ref - 1]
 
-        targetBoard.addItems(tasks)
-        testData.push(targetBoard)
+        console.log(ref)
+
+        console.log(targetBoard)
+
+        targetBoard.addItems(task)
 
         setLocal()
     }

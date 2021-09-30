@@ -9,7 +9,7 @@ const Test = (() => {
 
         let testBoard = new ProjectBoard("Default Project", "September 21")
 
-        let ref = testBoard.refNum
+        let ref = testBoard.refNum -1
 
         let oneTags = ["Illustrator", "Design", "It's Lit", "Fitness"]
         let taskOne = new Task("Add Svgs to project", "Pretty Good", ref, oneTags)
