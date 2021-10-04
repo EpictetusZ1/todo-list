@@ -5,9 +5,16 @@ import GetTags from "./populateTags";
 import GetTaskData from "./populateForm";
 
 const AddContent = (()=> {
+    let updated = false
 
-    let elements = GetStorage.loadDefaultView()
-    console.log(elements)
+
+    const loadContent = () => {
+        updated = true
+        return GetStorage.loadDefaultView(updated)
+    }
+
+    let elements = loadContent(updated)
+
 
     const popNavMenu = () => {
         const menu = document.getElementById("menu-element")
@@ -194,6 +201,7 @@ const AddContent = (()=> {
     const updateBoard = (id, newTask) => {
 
         let getRef = parseInt(document.querySelector(".project-container").getAttribute("data"))
+        console.log(elements)
 
         let targetProject = elements[getRef - 1]
 

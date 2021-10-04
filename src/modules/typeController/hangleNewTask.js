@@ -18,7 +18,6 @@ const HandleTask = (() => {
         populateDOM.updateBoard(stateID, newTask)
 
         Storage.updateLocal(newTask, projectRefNum)
-        console.log(newTask)
     }
 
     return {

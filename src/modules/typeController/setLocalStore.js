@@ -4,8 +4,8 @@ import {Task} from "../typeCreate/tasks";
 
 const Storage = (() => {
 
-    let testData = [...Test.alpha()]
 
+    let testData = [...Test.alpha()]
 
     const setLocal = () => {
         const setBoardItem = () => {
@@ -36,10 +36,14 @@ const Storage = (() => {
         testData.push(targetBoard)
 
         setLocal()
+
+    }
+    const addData = () => {
+        return testData
     }
 
-    const getLocal = () => {
 
+    const getLocal = () => {
         const getStorageString = () => {
             let keys = Object.keys(localStorage)
             let boardArr = []
@@ -117,7 +121,8 @@ const Storage = (() => {
     return {
         setLocal,
         getLocal,
-        updateLocal
+        updateLocal,
+        addData
     }
 
 })()
