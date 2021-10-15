@@ -7,6 +7,7 @@ An assignment from [The Odin ProjectBoard](https://www.theodinproject.com/) to l
 - SOLID principles
 - ES6 Modules
 - Dynamic Updating of ```localStorage``` both read and write
+- State Management
 
 ### Things I learned:
 - Public field declarations for code readability
