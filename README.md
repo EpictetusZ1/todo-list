@@ -2,7 +2,7 @@
 
 ### This project is similar to 'kanban' Boards
 
-An assignment from [The Odin ProjectBoard](https://www.theodinproject.com/) to learn and practice:
+An assignment from [The Odin Project](https://www.theodinproject.com/) to learn and practice:
 - OOP Principles
 - SOLID principles
 - ES6 Modules
