@@ -1,37 +1,49 @@
 import React, {useEffect, useState} from "react";
 import uniqid from 'uniqid';
+import { ProjectInterface } from "./interfaces";
+import Project from "./Project";
 
 const Main = () => {
 
-    const [projects, setProjects] = useState<Array<Project>>([])
+    const [projects, setProjects] = useState<Array<ProjectInterface>>([])
 
-    const initState: Project = {
-        title: "My To Do List",
-        dateCreated: "2 January 2022",
-        items: [],
-        id: uniqid.time("project-"),
-        currProject: true
+    const initState: ProjectInterface = {
+        data: {
+            title: "My To Do List",
+            dateCreated: "2 January 2022",
+            taskStates: [
+                {
+                    code: 0,
+                    status: "No Status",
+                    items: [
+                        {
+                            title: "Test Task",
+                            desc: "Testing done here",
+                            dueDate: "friday",
+                            priority: 1,
+                            notes: "Not Really"
+                        }
+                    ]
+                }
+            ],
+            id: uniqid.time("project-"),
+            isCurrProject: true
+        }
     }
+
+    const [currProject, setCurrProject] = useState(initState)
 
     useEffect(() => {
         //TODO: Check for project in local storage here
-        setProjects([initState])
-        console.log(projects)
+        setProjects([initState]) // Adding default project
     }, [])
-
-    interface Project {
-        title: string,
-        dateCreated: string,
-        items: Array<object>,
-        id: string,
-        currProject: boolean
-    }
+    // TODO: Add map function to show projects in menu
 
     return (
        <div>
            <div>
-               Menu
-               ...
+               <Project data={currProject} />
+
            </div>
        </div>
    )
