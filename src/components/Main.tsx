@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import {ProjectType, Task} from "./Project.types";
+import {ProjectType, Task} from "../types/Project.types";
 import { Project } from "./Project";
-import uniqid from "uniqid";
 import {initState} from "./mockStorage";
+
+import * as styled from "../styles/MainStyle";
 
 const Main = () => {
     const [projects, setProjects] = useState<Array<ProjectType>>([])
@@ -13,9 +14,9 @@ const Main = () => {
     // }, [])
 
     return (
-       <div className={"main"}>
+       <styled.MainStyle className={"main"}>
            <Project data={initState} />
-       </div>
+       </styled.MainStyle>
    )
 }
 

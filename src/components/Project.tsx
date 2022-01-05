@@ -1,9 +1,11 @@
-import { ProjectType, Task } from "./Project.types";
+import { ProjectProps,  Task } from "../types/Project.types";
 import { TaskCard } from "./TaskCard";
 import uniqid from "uniqid";
 import React, {useEffect, useState} from "react";
 
-export const Project = ({data}: {data: ProjectType}) => {
+import * as styled from "../styles/Project";
+
+export const Project = ({data}: ProjectProps) => {
 
     const [currProject, setCurrProject] = useState(data)
     const { title, dateCreated } = data
@@ -64,49 +66,39 @@ export const Project = ({data}: {data: ProjectType}) => {
     useEffect(() => {
         addTask(testItem2)
         addTask(testItem4)
-
     }, [])
 
 
     const makeCard = () => {
         return (
-            <div className={"statusContainers"}>
-                <div className={"noStatus"}>
-                    <h3>No Status</h3>
-                    <ul>
+            <styled.StatusBoardStyle>
+                <styled.StatusSection className={"noStatus"}>
+                    <styled.StatusHeader>No Status</styled.StatusHeader>
                         {currProject.items.noStatus.map((item: Task) => <TaskCard data={item} key={item.id} />)}
-                    </ul>
                     <button data-custom={0}>Add Item</button>
-                </div>
+                </styled.StatusSection>
 
-                <div className={"doingStatus"}>
-                    <h3>Doing</h3>
-                    <ul>
+                <styled.StatusSection className={"doingStatus"}>
+                    <styled.StatusHeader>Doing</styled.StatusHeader>
                         {currProject.items.doing.map((item: Task) => <TaskCard data={item} key={item.id} />)}
-                    </ul>
                     <button data-custom={1}>Add Item</button>
-                </div>
+                </styled.StatusSection>
 
-                <div className={"doneStatus"}>
-                    <h3>Done</h3>
-                    <ul>
+                <styled.StatusSection className={"doneStatus"}>
+                    <styled.StatusHeader>Done</styled.StatusHeader>
                         {currProject.items.done.map((item: Task) => <TaskCard data={item} key={item.id} />)}
-                    </ul>
                     <button data-custom={2}>Add Item</button>
-                </div>
-
-            </div>
+                </styled.StatusSection>
+                </styled.StatusBoardStyle>
         )
     }
 
     return (
-        <div className={"projectContainer"}>
+        <styled.ProjectStyle>
             <h2>Project: {title}</h2>
             <h6>Created on: {dateCreated}</h6>
-
             { makeCard() }
-
-        </div>
+        </styled.ProjectStyle>
     );
 }
 

@@ -1,3 +1,7 @@
+export interface ProjectProps {
+    data: ProjectType
+}
+
 export type ProjectType = {
     title: string,
     dateCreated: string,
@@ -9,6 +13,10 @@ export type ProjectType = {
     id: string,
     isCurrProject: boolean,
     addTask: (task: Task) => any
+}
+
+export interface TaskProps {
+    data: Task
 }
 
 export type Task = {
