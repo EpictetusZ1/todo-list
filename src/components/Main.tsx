@@ -1,35 +1,20 @@
-import React, {useEffect, useState} from "react";
-import { ProjectInterface, Task } from "./interfaces";
-import Project from "./Project";
-import { initState } from "./mockStorage";
+import { useEffect, useState } from "react";
+import {ProjectType, Task} from "./Project.types";
+import { Project } from "./Project";
+import uniqid from "uniqid";
+import {initState} from "./mockStorage";
 
 const Main = () => {
+    const [projects, setProjects] = useState<Array<ProjectType>>([])
+    const [displayedProject, setDisplayedProject] = useState(initState)
 
-    const [projects, setProjects] = useState<Array<ProjectInterface>>([])
-    const [currProject, setCurrProject] = useState(initState)
-
-    useEffect(() => {
-        const sortItems = (currProject: ProjectInterface) => {
-            currProject.items.map( (item) => {
-                switch (item.status) {
-                    case 0:
-                        setCurrProject(prevState => ({
-                            ...prevState, sorted: [...prevState["sorted"][0]]
-                        }))
-                        break
-                    default: return currProject
-                }
-
-            })
-        }
-        sortItems(currProject)
-    }, [])
+    // useEffect(() => {
+    // TODO: add logic to check localStorage here
+    // }, [])
 
     return (
-       <div>
-           <div>
-               <Project data={currProject} />
-           </div>
+       <div className={"main"}>
+           <Project data={initState} />
        </div>
    )
 }
