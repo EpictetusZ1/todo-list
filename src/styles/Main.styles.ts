@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MainStyle = styled.div`
+export const MainStyles = styled.div`
   height: 100%;
   width: 90%;
   position: relative;

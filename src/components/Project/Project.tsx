@@ -1,12 +1,13 @@
-import { ProjectProps,  Task } from "../types/Project.types";
-import { TaskCard } from "./TaskCard";
+import { ProjectProps,  Task } from "../../types/Project.types";
+import { TaskCard } from "../TaskCard/TaskCard";
+import { TaskForm } from "../TaskForm/TaskForm";
 import uniqid from "uniqid";
 import React, {useEffect, useState} from "react";
+import * as styled from "./Project.styles";
 
-import * as styled from "../styles/Project";
+export const Project: React.FC<ProjectProps> = ( {data} ) => {
 
-export const Project = ({data}: ProjectProps) => {
-
+    const [showForm, setShowForm] = useState(false)
     const [currProject, setCurrProject] = useState(data)
     const { title, dateCreated } = data
 
@@ -75,29 +76,43 @@ export const Project = ({data}: ProjectProps) => {
                 <styled.StatusSection className={"noStatus"}>
                     <styled.StatusHeader>No Status</styled.StatusHeader>
                         {currProject.items.noStatus.map((item: Task) => <TaskCard data={item} key={item.id} />)}
-                    <button data-custom={0}>Add Item</button>
+                    {toggleButtonForm(0)}
                 </styled.StatusSection>
 
                 <styled.StatusSection className={"doingStatus"}>
                     <styled.StatusHeader>Doing</styled.StatusHeader>
                         {currProject.items.doing.map((item: Task) => <TaskCard data={item} key={item.id} />)}
-                    <button data-custom={1}>Add Item</button>
+                    {toggleButtonForm(1)}
                 </styled.StatusSection>
 
                 <styled.StatusSection className={"doneStatus"}>
                     <styled.StatusHeader>Done</styled.StatusHeader>
                         {currProject.items.done.map((item: Task) => <TaskCard data={item} key={item.id} />)}
-                    <button data-custom={2}>Add Item</button>
+                    {/*<styled.ButtonStyle data-custom={2}>Add Item</styled.ButtonStyle>*/}
+                    {toggleButtonForm(2)}
                 </styled.StatusSection>
                 </styled.StatusBoardStyle>
         )
     }
 
+    const toggleButtonForm = (status: number) => {
+        return (
+            <styled.ButtonStyle
+                onClick={ () => setShowForm(prevState => !prevState) }
+                data-custom={status}
+            >
+                Add Item
+            </styled.ButtonStyle>
+        )
+    }
+
     return (
         <styled.ProjectStyle>
-            <h2>Project: {title}</h2>
+            <h2>{title}</h2>
             <h6>Created on: {dateCreated}</h6>
+            {/* Below creates divs for 3 sep. sections */}
             { makeCard() }
+            { showForm && <TaskForm />}
         </styled.ProjectStyle>
     );
 }

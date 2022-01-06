@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import {ProjectType, Task} from "../types/Project.types";
-import { Project } from "./Project";
-import {initState} from "./mockStorage";
+import React, { useEffect, useState } from "react";
+import { ProjectType, Task } from "../types/Project.types";
+import { Project } from "./Project/Project";
+import { initState } from "./mockStorage";
 
-import * as styled from "../styles/MainStyle";
+import * as styled from "../styles/Main.styles";
 
-const Main = () => {
+const Main: React.FC = () => {
     const [projects, setProjects] = useState<Array<ProjectType>>([])
     const [displayedProject, setDisplayedProject] = useState(initState)
 
@@ -14,9 +14,9 @@ const Main = () => {
     // }, [])
 
     return (
-       <styled.MainStyle className={"main"}>
+       <styled.MainStyles className={"main"}>
            <Project data={initState} />
-       </styled.MainStyle>
+       </styled.MainStyles>
    )
 }
 
