@@ -1,8 +1,8 @@
 import React from "react";
-import { TaskProps } from "../../types/Project.types";
+import { TaskCardProps } from "../../types/Project.types";
 import * as styled from "./TaskCard.styles";
 
-export const TaskCard: React.FC<TaskProps> = ( {data} ) => {
+export const TaskCard: React.FC<TaskCardProps> = ( {data} ) => {
     return (
         <styled.TaskCardStyle className={"taskCard"}>
             <h4>{data.title}</h4>

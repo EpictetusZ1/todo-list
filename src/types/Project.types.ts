@@ -15,17 +15,22 @@ export type ProjectType = {
     addTask: (task: Task) => any
 }
 
-export interface TaskProps {
+export interface TaskCardProps {
     data: Task
 }
 
 export type Task = {
-    status: number,
+    status: "" | "noStatus" | "doing" | "done",
     id: string,
     title: string,
     desc: string,
     dueDate: string,
-    priority: number,
+    priority:  "" | "low" | "medium" | "High"
     notes?: string,
     checklist?: Array<string>
 }
+
+export interface TaskFormProps {
+    addTasksSetter: (task: Task) => any
+}
+

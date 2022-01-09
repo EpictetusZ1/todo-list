@@ -12,52 +12,53 @@ export const Project: React.FC<ProjectProps> = ( {data} ) => {
     const { title, dateCreated } = data
 
     const testItem2: Task = {
-        status: 1,
+        status: "doing",
         id: uniqid.time("task-"),
         title: "Test Bravo",
         desc: "Starting to work",
         dueDate: "Saturday",
-        priority: 1,
+        priority: "low",
         notes: "Not Really"
     }
 
     const testItem4: Task = {
-        status: 2,
+        status: "done",
         id: uniqid.time("task-"),
         title: "Test I AM DONE",
         desc: "Starting IT WORKS????",
         dueDate: "Forever",
-        priority: 1,
+        priority: "low",
         notes: "WOOOOOOOOOO"
     }
 
     const addTask = (task: Task) => {
+        setShowForm(prevState => !prevState)
         switch (task.status) {
             default: return currProject
-            case 0:
+            case "noStatus":
                  setCurrProject((prevState => ({
                     ...prevState,
                     items: {
                         ...prevState.items,
-                        noStatus: currProject.items.noStatus.concat(task)
+                        noStatus: prevState.items.noStatus.concat(task)
                     }
                 })))
                 break
-            case 1:
+            case "doing":
                  setCurrProject((prevState => ({
                     ...prevState,
                     items: {
                         ...prevState.items,
-                        doing: currProject.items.doing.concat(task)
+                        doing: prevState.items.doing.concat(task)
                     }
                 })))
                 break
-            case 2:
+            case "done":
                  setCurrProject((prevState => ({
                     ...prevState,
                     items: {
                         ...prevState.items,
-                        done: currProject.items.done.concat(task)
+                        done: prevState.items.done.concat(task)
                     }
                 })))
                 break
@@ -69,28 +70,26 @@ export const Project: React.FC<ProjectProps> = ( {data} ) => {
         addTask(testItem4)
     }, [])
 
-
     const makeCard = () => {
         return (
             <styled.StatusBoardStyle>
+
                 <styled.StatusSection className={"noStatus"}>
                     <styled.StatusHeader>No Status</styled.StatusHeader>
-                        {currProject.items.noStatus.map((item: Task) => <TaskCard data={item} key={item.id} />)}
+                        {currProject.items.noStatus.map( (item: Task) => <TaskCard data={item} key={item.id} />)}
                     {toggleButtonForm(0)}
                 </styled.StatusSection>
 
                 <styled.StatusSection className={"doingStatus"}>
                     <styled.StatusHeader>Doing</styled.StatusHeader>
-                        {currProject.items.doing.map((item: Task) => <TaskCard data={item} key={item.id} />)}
-                    {toggleButtonForm(1)}
+                        {currProject.items.doing.map( (item: Task) => <TaskCard data={item} key={item.id} />)}
                 </styled.StatusSection>
 
                 <styled.StatusSection className={"doneStatus"}>
                     <styled.StatusHeader>Done</styled.StatusHeader>
-                        {currProject.items.done.map((item: Task) => <TaskCard data={item} key={item.id} />)}
-                    {/*<styled.ButtonStyle data-custom={2}>Add Item</styled.ButtonStyle>*/}
-                    {toggleButtonForm(2)}
+                        {currProject.items.done.map( (item: Task) => <TaskCard data={item} key={item.id} />)}
                 </styled.StatusSection>
+
                 </styled.StatusBoardStyle>
         )
     }
@@ -110,9 +109,8 @@ export const Project: React.FC<ProjectProps> = ( {data} ) => {
         <styled.ProjectStyle>
             <h2>{title}</h2>
             <h6>Created on: {dateCreated}</h6>
-            {/* Below creates divs for 3 sep. sections */}
             { makeCard() }
-            { showForm && <TaskForm />}
+            { showForm && <TaskForm addTasksSetter={addTask} />}
         </styled.ProjectStyle>
     );
 }
