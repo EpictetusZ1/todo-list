@@ -1,9 +1,17 @@
-import React, {useState} from "react";
-import {Task, TaskFormProps} from "../../types/Project.types";
+import React, {SetStateAction, useContext, useState} from "react";
+import { Task } from "../../types/Project.types";
 import {TaskFormStyles, FormElStyle, SubmitButton} from "./TaskForm.styles";
 import uniqid from "uniqid";
+import {CurrPContext, ProjectsContext} from "../../App";
 
-export const TaskForm: React.FC<TaskFormProps> = ({ addTasksSetter }) => {
+interface TaskFormProps {
+    toggleForm: React.Dispatch<SetStateAction<boolean>>
+}
+
+
+export const TaskForm: React.FC<TaskFormProps> = ({toggleForm}) => {
+    const projectsContext = useContext(ProjectsContext)
+    const currPContext = useContext(CurrPContext)
     const initFormState: Task = {
         status: "noStatus",
         id: uniqid.time("task-"),
@@ -33,7 +41,14 @@ export const TaskForm: React.FC<TaskFormProps> = ({ addTasksSetter }) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        addTasksSetter(formPayload)
+        toggleForm((prevState: boolean) => !prevState)
+        console.dir(formPayload)
+        //TODO: ADD method to update project here
+        const formatPayload = {
+            type: `${formPayload.status}`,
+            data: formPayload
+        }
+        currPContext.currPDispatch(formatPayload)
     }
 
    return (

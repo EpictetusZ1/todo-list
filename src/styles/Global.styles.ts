@@ -10,7 +10,6 @@ export const COLORS = {
 }
 
 export const GlobalStyle = createGlobalStyle`
-  
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -22,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h2 {
-    margin: 0.2em 0;
+    margin: 10px 0;
     height: 1.5em;
     width: auto;
     align-items: center;

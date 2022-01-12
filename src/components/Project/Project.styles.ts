@@ -4,7 +4,7 @@ import {COLORS} from "../../styles/Global.styles";
 export const ProjectStyle = styled.div`
   height: 95%;
   width: 100%;
-  margin-top: 8%;
+  margin-top: 70px;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;

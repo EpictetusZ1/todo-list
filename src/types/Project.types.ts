@@ -1,7 +1,3 @@
-export interface ProjectProps {
-    data: ProjectType
-}
-
 export type ProjectType = {
     title: string,
     dateCreated: string,
@@ -10,9 +6,7 @@ export type ProjectType = {
         doing: Array<Task>,
         done: Array<Task>,
     }
-    id: string,
-    isCurrProject: boolean,
-    addTask: (task: Task) => any
+    id: string
 }
 
 export interface TaskCardProps {
@@ -29,8 +23,3 @@ export type Task = {
     notes?: string,
     checklist?: Array<string>
 }
-
-export interface TaskFormProps {
-    addTasksSetter: (task: Task) => any
-}
-
