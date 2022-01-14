@@ -1,13 +1,17 @@
+import React, {SetStateAction} from "react";
+
 export type ProjectType = {
     title: string,
     dateCreated: string,
-    items: {
-        noStatus: Array<Task>,
-        doing: Array<Task>,
-        done: Array<Task>,
-    }
+    items: Array<Task>,
     id: string
 }
+
+export interface TaskFormProps {
+    toggleForm: React.Dispatch<SetStateAction<boolean>>
+}
+
+
 
 export interface TaskCardProps {
     data: Task

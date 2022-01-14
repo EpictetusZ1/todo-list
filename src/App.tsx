@@ -1,48 +1,77 @@
 import React, { useReducer } from 'react';
 import Main from "./components/Main";
-import Header from "./components/Header/Header";
 import { ProjectType } from "./types/Project.types";
-import { initState, project2 } from "./components/mockStorage";
+import { initState } from "./components/mockStorage";
 
-export const ProjectsContext = React.createContext<ProjectType | any >(undefined)
 export const CurrPContext = React.createContext<ProjectType | any>(undefined)
+export const ProjectsContext = React.createContext<ProjectType | any >(undefined)
 
-const initialState = [initState, project2]
+const reducer = (state: any, action: any) => {
+    const myProjects = [...state.projects] // Copy of state as to not mutate
 
-const reducer = (state: Array<ProjectType>, action: any) => {
-    switch (action) {
-        default:
-            return state
-    }
-}
-
-const reducerCurr = (state: ProjectType, action: any) => {
-    //TODO: Add doing and done status calls
     switch (action.type) {
         default:
             return state
-        case "noStatus":
+        case "localStorageFound":
             return {
                 ...state,
-                state: state.items.noStatus = [...state.items.noStatus, action.data]
+                projects: action.data
+            }
+        case "addTask":
+            const pIndex = state.projects.findIndex((item: ProjectType) => item.id === action.projectID)
+            const arrWithNewItem = myProjects[pIndex].items.concat(action.data)
+            myProjects[pIndex].items = arrWithNewItem
+
+            return {
+                ...state,
+                projects: myProjects
+            }
+        case "updateCurrInArr":
+            const index = state.projects.findIndex((item: any) => item.id === action.payload.id)
+            const taskRemovedArr = myProjects[index].items.filter((item: any) => item.id !== action.taskID)
+
+            myProjects[index].items = taskRemovedArr
+            return {
+                ...state,
+                projects: myProjects
+            }
+    }
+}
+
+const reducerCurr = (state: any, action: any) => {
+    switch (action.type) {
+        default:
+            return state
+        case "addTask":
+            return {
+                ...state,
+                items: [...state.items, action.data]
             }
         case "switchCurr":
             return state = action.data
+        case "removeTask":
+            return {
+                ...state,
+                items: state.items.filter((element: ProjectType) => element.id !== action.data)
+            }
     }
 }
 
 const App = () => {
+    const initProjects = { projects: []}
+
     const [currProject, dispatchCurr] = useReducer(reducerCurr, initState)
-    const [projects, dispatch] = useReducer(reducer, initialState)
+    const [projects, dispatch] = useReducer(reducer, initProjects)
 
     return (
+        // @ts-ignore
         <ProjectsContext.Provider value={ {projectsState: projects, projectsDispatch: dispatch} }>
-            <CurrPContext.Provider value={ {currPState: currProject, currPDispatch: dispatchCurr} }>
-                <div className="App">
-                    <Header />
-                    <Main />
-                </div>
-            </CurrPContext.Provider>
+        {/* @ts-ignore */}
+        <CurrPContext.Provider value={ {currPState: currProject, currPDispatch: dispatchCurr} }>
+            <div className="App">
+                <Main />
+            </div>
+        </CurrPContext.Provider>
         </ProjectsContext.Provider>
     );
 }

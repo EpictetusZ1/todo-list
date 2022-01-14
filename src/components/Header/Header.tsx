@@ -1,6 +1,7 @@
-import React, { useContext } from "react"
+import React, {useContext } from "react"
 import * as styled from "./Header.styles"
-import {CurrPContext, ProjectsContext} from "../../App";
+import { CurrPContext, ProjectsContext } from "../../App";
+
 
 const Header: React.FC = () => {
     const projectsContext = useContext(ProjectsContext)
@@ -10,12 +11,13 @@ const Header: React.FC = () => {
         e.preventDefault()
 
         const trackDisplayedProject = (id: string) => {
-            for (let i = 0; i < projectsContext.projectsState.length; i++) {
-                if (projectsContext.projectsState[i].id === id) {
+            for (let i = 0; i < projectsContext.projectsState.projects.length; i++) {
+                if (projectsContext.projectsState.projects[i].id === id) {
                     const formatData = {
                         type: "switchCurr",
-                        data: projectsContext.projectsState[i]
+                        data: projectsContext.projectsState.projects[i]
                     }
+
                    currPContext.currPDispatch(formatData)
                 }
             }
@@ -26,13 +28,13 @@ const Header: React.FC = () => {
 
     return (
         <styled.HeaderStyle>
-            <div>
-                <label htmlFor="projects">Select Project</label>
+            <styled.ProjectSelectStyle>
+                <label htmlFor="projects">Select A Project: </label>
                 <select name="projects"
                         onChange={handleSelectedChange}
-                        value={currPContext.currPState.value}
+                        value={currPContext.currPState.id}
                 >
-                    {projectsContext.projectsState.map( (project: any) => {
+                    {projectsContext.projectsState.projects.map( (project: any) => {
                         return (
                             <option key={project.id}
                                     value={project.id}
@@ -43,7 +45,7 @@ const Header: React.FC = () => {
                     })}
 
                 </select>
-            </div>
+            </styled.ProjectSelectStyle>
             <h1>To Do-ify</h1>
         </styled.HeaderStyle>
     )
