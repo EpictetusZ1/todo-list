@@ -1,32 +1,26 @@
 import React, {useContext } from "react";
-import { TaskCardProps } from "../../types/Project.types";
+import { ITaskCardProps } from "../../types/Project.types";
 import * as styled from "./TaskCard.styles";
 import { CurrPContext, ProjectsContext } from "../../App";
 
-
-export const TaskCard: React.FC<TaskCardProps> = ( {data} ) => {
+export const TaskCard: React.FC<ITaskCardProps> = ({data} ) => {
     const currProjectContext = useContext(CurrPContext)
     const projectsContext = useContext(ProjectsContext)
 
     const removeItem = () => {
         const removeTask = {
             type: "removeTask",
-            data: data.id,
+            taskID: data.id,
         }
+        currProjectContext.currPDispatch(removeTask) // Remove item from currProject
 
         const newProjectState = {
             type: "updateCurrInArr",
-            payload: currProjectContext.currPState,
-            status: data.status,
+            data: currProjectContext.currPState,
             taskID: data.id
         }
-
-        currProjectContext.currPDispatch(removeTask) // Remove item from currProject
-
         projectsContext.projectsDispatch(newProjectState) // Reflect change in project array
-
     }
-
 
     return (
         <styled.TaskCardStyle className={"taskCard"}>

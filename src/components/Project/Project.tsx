@@ -1,4 +1,4 @@
-import { ProjectType, Task} from "../../types/Project.types";
+import { IProjectType, Task} from "../../types/Project.types";
 import { TaskCard } from "../TaskCard/TaskCard";
 import { TaskForm } from "../TaskForm/TaskForm";
 import React, {useContext, useState} from "react";
@@ -10,7 +10,7 @@ export const Project: React.FC = (  ) => {
     const [showForm, setShowForm] = useState(false)
     const currProjectContext = useContext(CurrPContext)
 
-    const sortByStatus = (currProject: ProjectType) => {
+    const sortByStatus = (currProject: IProjectType) => {
         const noStatus = currProject.items.filter((obj) => obj.status === "noStatus")
         const doingStatus = currProject.items.filter((obj) => obj.status === "doing")
         const doneStatus = currProject.items.filter((obj) => obj.status === "done")
@@ -21,7 +21,7 @@ export const Project: React.FC = (  ) => {
         ]
     }
 
-    const makeCard = (currProject: ProjectType) => {
+    const makeCard = (currProject: IProjectType) => {
         const [noStatus, doing, done] =   sortByStatus(currProject)
 
         return (

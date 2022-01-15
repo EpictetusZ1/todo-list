@@ -1,15 +1,17 @@
-import React, {useContext } from "react"
+import React, {useContext, useState} from "react"
 import * as styled from "./Header.styles"
 import { CurrPContext, ProjectsContext } from "../../App";
-
+import {TaskForm} from "../TaskForm/TaskForm";
+import ProjectForm from "../ProjectForm/ProjectForm";
 
 const Header: React.FC = () => {
     const projectsContext = useContext(ProjectsContext)
     const currPContext = useContext(CurrPContext)
 
+    const [showPForm, setShowPForm] = useState<boolean>(true)
+
     const handleSelectedChange = (e: React.ChangeEvent<HTMLSelectElement>): any => {
         e.preventDefault()
-
         const trackDisplayedProject = (id: string) => {
             for (let i = 0; i < projectsContext.projectsState.projects.length; i++) {
                 if (projectsContext.projectsState.projects[i].id === id) {
@@ -46,6 +48,10 @@ const Header: React.FC = () => {
 
                 </select>
             </styled.ProjectSelectStyle>
+            { showPForm && <ProjectForm  toggleForm={setShowPForm} />}
+
+            <styled.AddProjectBtn >New Project</styled.AddProjectBtn>
+
             <h1>To Do-ify</h1>
         </styled.HeaderStyle>
     )

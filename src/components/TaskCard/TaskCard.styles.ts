@@ -31,3 +31,38 @@ export const TaskCardStyle = styled.div`
   }
 `
 
+export const CardHeader = styled.div`
+  width: 97%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+
+  button {
+    height: 22px;
+    width: 22px;
+    background-image: linear-gradient(#0dccea, #0d70ea);
+    border: 0;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, .3) 0 2px 5px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: Verdana, sans-serif;
+    font-weight: bold;
+    font-size: .9em;
+    line-height: .9em;
+    margin: 5px;
+    padding: 5px; 
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transition: all 0.2s ease-in-out;
+  }
+
+  button:hover {
+    color: #838d9f;
+  }
+`
+

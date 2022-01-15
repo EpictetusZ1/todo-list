@@ -1,26 +1,24 @@
 import styled from "styled-components";
 import {COLORS} from "../../styles/Global.styles";
 
-export const TaskFormStyles = styled.div`
-    height: 60vh;
-    width: auto;
-    padding: 0 30px;
-    max-width: 20vw;
-    margin-bottom: 50px;
-    position: absolute;
-    z-index: 10;
-    border-radius: 35px;
-    background: ${COLORS.champagnePink}; 
-    transition: all 0.3s ease-in;
-    animation-name: appear;
-    animation-duration: 0.2s;
-    opacity: 1;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    align-content: flex-start;
-    font-size: 1.3em;
+export const ProjectFormStyles = styled.div`
+  height: auto;
+  width: 500px;
+  margin-top: 50%;
+  padding: 0 30px;
+  z-index: 10;
+  border-radius: 30px;
+  background: ${COLORS.champagnePink};
+  transition: all 0.3s ease-in;
+  animation-name: appear;
+  animation-duration: 0.2s;
+  opacity: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+  font-size: 1.3em;
 
   @keyframes appear {
     from {
@@ -32,7 +30,7 @@ export const TaskFormStyles = styled.div`
   }
 
   p {
-    color: ${COLORS.mnBlue}; 
+    color: ${COLORS.mnBlue};
     font-family: Geomanist, sans-serif;
     font-size: 1.5em;
     width: 100%;
@@ -48,7 +46,7 @@ export const TaskFormStyles = styled.div`
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-around;
-    
+
     select {
       margin-top: 5px;
     }
@@ -65,18 +63,19 @@ export const FormElStyle = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
+
   label {
-    margin: 5px 0;
+    margin: 10px 0;
     width: 100%;
     font-size: 1.2em;
     font-family: Verdana, sans-serif;
   }
-  
+
   input[type=text] {
     height: 50%;
     width: 80%;
     font-size: 1em;
+    text-align: center;
   }
 `
 
@@ -112,7 +111,7 @@ export const SubmitButton = styled.button`
 `
 
 export const FormHeader = styled.div`
-  width: 97%;
+  width: 75%;
   margin-top: 10px;
   display: flex;
   flex-direction: row;
@@ -144,5 +143,4 @@ export const FormHeader = styled.div`
   button:hover {
     color: #838d9f;
   }
-
 `

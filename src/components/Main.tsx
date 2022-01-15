@@ -2,13 +2,13 @@ import React, { useContext, useEffect } from "react";
 import * as styled from "../styles/Main.styles";
 import { Project } from "./Project/Project";
 import Header from "./Header/Header";
-import {ProjectType} from "../types/Project.types";
+import {IProjectType} from "../types/Project.types";
 import uniqid from "uniqid";
 import { ProjectsContext } from "../App";
 
-const defaultProject: ProjectType = {
+const defaultProject: IProjectType = {
     title: "New Project",
-    dateCreated: "2 January 2022",
+    dateCreated: new Date().toDateString(),
     items: [],
     id: uniqid.time("Project-")
 }
@@ -18,9 +18,9 @@ const Main: React.FC = () => {
 
     useEffect(() => {
         const checkLocalStorage = () => {
-            let isLocal = localStorage.getItem('projects')
+            const isLocal = localStorage.getItem('projects')
             if ( isLocal !== null) {
-                return JSON.parse(isLocal || "")  // Redundant variable - TypeScript being picky on string | null
+                return JSON.parse(isLocal)
             } else {
                 return [defaultProject]
             }

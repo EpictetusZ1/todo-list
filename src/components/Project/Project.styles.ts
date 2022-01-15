@@ -3,6 +3,7 @@ import {COLORS} from "../../styles/Global.styles";
 
 export const ProjectStyle = styled.div`
   height: 95%;
+  margin-left: 30px;
   width: 100%;
   margin-top: 70px;
   display: flex;
@@ -12,7 +13,7 @@ export const ProjectStyle = styled.div`
 
 export const StatusBoardStyle = styled.div`
   height: 100%;
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

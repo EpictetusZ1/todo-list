@@ -1,14 +1,13 @@
 import React, { useReducer } from 'react';
 import Main from "./components/Main";
-import { ProjectType } from "./types/Project.types";
+import {IProjectType, Task, IProjects, IAction} from "./types/Project.types";
 import { initState } from "./components/mockStorage";
 
-export const CurrPContext = React.createContext<ProjectType | any>(undefined)
-export const ProjectsContext = React.createContext<ProjectType | any >(undefined)
+export const CurrPContext = React.createContext<IProjectType | any>(undefined)
+export const ProjectsContext = React.createContext<IProjectType | any >(undefined)
 
-const reducer = (state: any, action: any) => {
-    const myProjects = [...state.projects] // Copy of state as to not mutate
-
+const reducer = (state: IProjects, action: any) => {
+    const myProjects = [...state.projects]
     switch (action.type) {
         default:
             return state
@@ -18,27 +17,30 @@ const reducer = (state: any, action: any) => {
                 projects: action.data
             }
         case "addTask":
-            const pIndex = state.projects.findIndex((item: ProjectType) => item.id === action.projectID)
-            const arrWithNewItem = myProjects[pIndex].items.concat(action.data)
+            const pIndex = state.projects.findIndex((item: IProjectType) => item.id === action.projectID)
+            const arrWithNewItem = state.projects[pIndex].items.concat(action.data)
             myProjects[pIndex].items = arrWithNewItem
-
             return {
                 ...state,
                 projects: myProjects
             }
         case "updateCurrInArr":
-            const index = state.projects.findIndex((item: any) => item.id === action.payload.id)
-            const taskRemovedArr = myProjects[index].items.filter((item: any) => item.id !== action.taskID)
-
+            const index = state.projects.findIndex((item: IProjectType) => item.id === action.data.id)
+            const taskRemovedArr = myProjects[index].items.filter((item: Task) => item.id !== action.taskID)
             myProjects[index].items = taskRemovedArr
             return {
                 ...state,
                 projects: myProjects
             }
+        case "addProject":
+            return ({
+                ...state,
+                projects: [...state.projects, action.data]
+            })
     }
 }
 
-const reducerCurr = (state: any, action: any) => {
+const reducerCurr = (state: IProjectType, action: IAction) => {
     switch (action.type) {
         default:
             return state
@@ -48,25 +50,26 @@ const reducerCurr = (state: any, action: any) => {
                 items: [...state.items, action.data]
             }
         case "switchCurr":
-            return state = action.data
+            return ({
+                ...action.data
+            })
         case "removeTask":
             return {
                 ...state,
-                items: state.items.filter((element: ProjectType) => element.id !== action.data)
+                items: state.items.filter((element: Task) => element.id !== action.taskID)
             }
     }
 }
 
 const App = () => {
     const initProjects = { projects: []}
-
+    // @ts-ignore
     const [currProject, dispatchCurr] = useReducer(reducerCurr, initState)
+    // @ts-ignore
     const [projects, dispatch] = useReducer(reducer, initProjects)
 
     return (
-        // @ts-ignore
         <ProjectsContext.Provider value={ {projectsState: projects, projectsDispatch: dispatch} }>
-        {/* @ts-ignore */}
         <CurrPContext.Provider value={ {currPState: currProject, currPDispatch: dispatchCurr} }>
             <div className="App">
                 <Main />
