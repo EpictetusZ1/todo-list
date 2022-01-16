@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { GlobalStyle } from "./styles/Global.styles";
-import MimicStorage from "./MimicStorage";
-import App from "./App";
+import FetchData from "./components/FetchData";
 
 ReactDOM.render(
   <React.StrictMode>
       <GlobalStyle />
-      <MimicStorage />
-      <App />
+      <FetchData />
   </React.StrictMode>,
   document.getElementById('root')
 );

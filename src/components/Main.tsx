@@ -14,24 +14,24 @@ const defaultProject: IProjectType = {
 }
 
 const Main: React.FC = () => {
-    const projectsContext = useContext(ProjectsContext)
-
-    useEffect(() => {
-        const checkLocalStorage = () => {
-            const isLocal = localStorage.getItem('projects')
-            if ( isLocal !== null) {
-                return JSON.parse(isLocal)
-            } else {
-                return [defaultProject]
-            }
-        }
-        const dispatchData = {
-            type: "localStorageFound",
-            data: checkLocalStorage()
-        }
-        projectsContext.projectsDispatch(dispatchData)
-
-    }, [])
+    // const projectsContext = useContext(ProjectsContext)
+    //
+    // useEffect(() => {
+    //     const checkLocalStorage = () => {
+    //         const isLocal = localStorage.getItem('projects')
+    //         if ( isLocal !== null) {
+    //             return JSON.parse(isLocal)
+    //         } else {
+    //             return [defaultProject]
+    //         }
+    //     }
+    //     const dispatchData = {
+    //         type: "localStorageFound",
+    //         data: checkLocalStorage()
+    //     }
+    //     projectsContext.projectsDispatch(dispatchData)
+    //
+    // }, [])
 
     return (
         <styled.MainStyles>

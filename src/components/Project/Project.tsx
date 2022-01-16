@@ -6,7 +6,6 @@ import * as styled from "./Project.styles";
 import {CurrPContext} from "../../App";
 
 export const Project: React.FC = (  ) => {
-
     const [showForm, setShowForm] = useState(false)
     const currProjectContext = useContext(CurrPContext)
 
@@ -26,25 +25,24 @@ export const Project: React.FC = (  ) => {
 
         return (
             <styled.StatusBoardStyle>
-                <styled.StatusSection className={"noStatus"}>
+                <styled.StatusSection>
                     <styled.StatusHeader>No Status</styled.StatusHeader>
                     {/* @ts-ignore*/}
                     {noStatus.map((item: Task) => <TaskCard data={item} key={item.id} />) }
                     {toggleButtonForm(0)}
                 </styled.StatusSection>
 
-                <styled.StatusSection className={"doingStatus"}>
+                <styled.StatusSection>
                     <styled.StatusHeader>Doing</styled.StatusHeader>
                     {/* @ts-ignore*/}
                     {doing.map((item: Task) => <TaskCard data={item} key={item.id} />) }
                 </styled.StatusSection>
 
-                <styled.StatusSection className={"doneStatus"}>
+                <styled.StatusSection>
                     <styled.StatusHeader>Done</styled.StatusHeader>
                     {/* @ts-ignore*/}
                     {done.map((item: Task) => <TaskCard data={item} key={item.id} />) }
                 </styled.StatusSection>
-
             </styled.StatusBoardStyle>
         )
     }
@@ -64,9 +62,9 @@ export const Project: React.FC = (  ) => {
         <styled.ProjectStyle>
             <h2>{currProjectContext.currPState.title}</h2>
             <h6>Created on: {currProjectContext.currPState.dateCreated}</h6>
+
             { makeCard(currProjectContext.currPState) }
             { showForm && <TaskForm  toggleForm={setShowForm}/>}
         </styled.ProjectStyle>
     );
 }
-

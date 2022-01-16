@@ -7,6 +7,14 @@ export interface IProjectType {
     id: string
 }
 
+export interface IStorage {
+    projects: IProjectType
+}
+
+export interface IAppProps {
+    localProjects: IProjectType | undefined
+}
+
 export interface IAction {
     type: string,
     data: object,
@@ -33,7 +41,5 @@ export interface Task {
     title: string,
     desc: string,
     dueDate: string,
-    priority:  "" | "low" | "medium" | "High"
-    notes?: string,
-    checklist?: Array<string>
+    priority:  "" | "Low" | "Medium" | "High"
 }

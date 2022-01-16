@@ -27,7 +27,6 @@ const ProjectForm: React.FC<ITaskFormProps> = ( {toggleForm} ) => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         toggleForm((prevState: boolean) => !prevState)
-
         const dispatchAddTask = {
             type: "addProject",
             data: PFormPayload

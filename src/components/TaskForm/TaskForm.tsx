@@ -14,7 +14,7 @@ export const TaskForm: React.FC<ITaskFormProps> = ({toggleForm} ) => {
         title: "",
         desc: "",
         dueDate: "",
-        priority: "low",
+        priority: "Low",
     }
 
     const [formPayload, setFormPayload] = useState(initFormState)
@@ -110,9 +110,9 @@ export const TaskForm: React.FC<ITaskFormProps> = ({toggleForm} ) => {
                             value={formPayload.priority}
                             onChange={handleSelectedChange}
                     >
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
                     </select>
                 </styled.FormElStyle>
 

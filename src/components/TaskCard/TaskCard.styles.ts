@@ -21,11 +21,15 @@ export const TaskCardStyle = styled.div`
   }
   
   h6 {
+    min-width: 33%;
     color: #000;
     font-size: 0.75em;
+    line-height: 1.2em;
   }
   
   p {
+    font-size: .9em;
+    line-height: 1.2em;
     padding: 0;
     margin: 5px 0;
   }
@@ -66,3 +70,10 @@ export const CardHeader = styled.div`
   }
 `
 
+export const CardSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 85%;
+  justify-content: space-between;
+  padding-bottom: 10px;
+`
