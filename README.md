@@ -2,12 +2,15 @@
 
 ### This project is similar to 'kanban' Boards
 
-An assignment from [The Odin ProjectBoard](https://www.theodinproject.com/) to learn and practice:
+An assignment from [The Odin Project](https://www.theodinproject.com/) to learn and practice:
 - OOP Principles
 - SOLID principles
 - ES6 Modules
 - Dynamic Updating of ```localStorage``` both read and write
-- State Management
+
+### Update:
+- Complete rebuild of project using React, TypeScript, Styled Components, useReducer and useContext hooks
+
 
 ### Things I learned:
 - Public field declarations for code readability
