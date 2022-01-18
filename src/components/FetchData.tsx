@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import App from "../App";
+import Main from "./Main/Main";
 import { IStorage, Task } from "../types/Project.types";
 import uniqid from "uniqid";
 
@@ -15,11 +15,10 @@ const testItem: Task = {
 export const initStateBlank: IStorage = {
     projects: {
         title: "To Do",
-        dateCreated: "",
+        dateCreated: new Date().toDateString(),
         items: [testItem],
         id: ""
     }
-
 }
 
 const FetchData: React.FC = () => {
@@ -49,7 +48,7 @@ const FetchData: React.FC = () => {
 
     return (
         <>
-            { loading ? <div>Loading</div> : <App localProjects={localProjects} />}
+            { loading ? <div>Loading</div> : <Main localProjects={localProjects} />}
         </>
     );
 };

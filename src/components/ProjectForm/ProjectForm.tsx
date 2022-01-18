@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import * as styled from "./ProjectForm.styles"
 import {IProjectType, ITaskFormProps} from "../../types/Project.types";
 import uniqid from "uniqid";
-import {ProjectsContext} from "../../App";
+import {ProjectsContext} from "../Main/Main";
 
 const ProjectForm: React.FC<ITaskFormProps> = ( {toggleForm} ) => {
     const projectsContext = useContext(ProjectsContext)

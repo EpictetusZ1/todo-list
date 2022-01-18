@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { GlobalStyle } from "./styles/Global.styles";
-import FetchData from "./components/FetchData";
+import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
       <GlobalStyle />
-      <FetchData />
+      <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

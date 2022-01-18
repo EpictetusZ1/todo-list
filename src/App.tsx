@@ -1,124 +1,41 @@
-import React, {useEffect, useReducer} from 'react';
-import {IProjectType, Task, IProjects, IAction, IAppProps} from "./types/Project.types";
-import Main from "./components/Main";
+import React, {useState} from 'react';
+import * as styled from "./styles/App.styles"
+import FetchData from "./components/FetchData";
+import Firebase from "./components/Firebase/Firebase";
+import {IPromptProps} from "./types/Storage.types";
 
-export const CurrPContext = React.createContext<IProjectType | any>(undefined)
-export const ProjectsContext = React.createContext<IProjectType | any >(undefined)
+// TODO: Display a screen asking a user if they want to sign in with google, or use localStorage
 
-const reducer = (state: IProjects, action: any) => {
-    const myProjects = [...state.projects]
-    switch (action.type) {
-        default:
-            return state
-        case "localStorageFound":
-            return {
-                ...state,
-                projects: action.data
-            }
-        case "addTask":
-            const pIndex = state.projects.findIndex((item: IProjectType) => item.id === action.projectID)
-            const arrWithNewItem = state.projects[pIndex].items.concat(action.data)
-            myProjects[pIndex].items = arrWithNewItem
-            return {
-                ...state,
-                projects: myProjects
-            }
-        case "updateCurrInArr":
-            const index = state.projects.findIndex((item: IProjectType) => item.id === action.data.id)
-            const taskRemovedArr = myProjects[index].items.filter((item: Task) => item.id !== action.taskID)
-            myProjects[index].items = taskRemovedArr
-            return {
-                ...state,
-                projects: myProjects
-            }
-        case "addProject":
-            return ({
-                ...state,
-                projects: [...state.projects, action.data]
-            })
-        case "updateStatus":
-            let targetIndex: number
-            const setIndex = () => {
-                for (let i = 0; i < myProjects.length; i++) {
-                    if (myProjects[i].id === action.projectID) {
-                        targetIndex = i
-                    }
-                }
-            }
-
-            const updateItem = () => {
-                setIndex()
-                if (myProjects !== undefined) {
-                    for (let i = 0; i < myProjects[targetIndex].items.length; i++) {
-                        if (myProjects[targetIndex].items[i].id === action.taskID) {
-                           myProjects[targetIndex].items[i].status = action.data
-                        }
-                    }
-                }
-            }
-            updateItem()
-            return {
-                ...state,
-                projects: myProjects
-            }
-    }
-}
-
-const reducerCurr = (state: IProjectType, action: IAction) => {
-    const curr = {...state}
-    switch (action.type) {
-        default:
-            return state
-        case "addTask":
-            return {
-                ...state,
-                items: [...state.items, action.data]
-            }
-        case "switchCurr":
-            return ({
-                ...action.data
-            })
-        case "removeTask":
-            return {
-                ...state,
-                items: state.items.filter((element: Task) => element.id !== action.taskID)
-            }
-        case "changeStatus":
-            const targetTask: object | undefined = curr.items.find((item: Task) => item.id === action.taskID)
-            const index = state.items.findIndex((item: Task) => item.id === action.taskID)
-            const newTodos = [...state.items]
-
-            // @ts-ignore
-            targetTask.status = action.data
-            newTodos[index] = targetTask as Task
-
-            return {
-                ...state,
-                items: newTodos
-            }
-    }
-}
-
-const App: React.FC<IAppProps> = ({localProjects}) => {
-    // @ts-ignore
-    const [currProject, dispatchCurr] = useReducer(reducerCurr, localProjects.projects[0])
-    // @ts-ignore
-    const [projects, dispatch] = useReducer(reducer, localProjects)
-
-    useEffect(() => {
-        // Save data to local storage on close for persistence
-        return () => {
-            localStorage.setItem("projects", JSON.stringify(projects.projects))
-        }
-    })
-
+const Prompt: React.FC<IPromptProps> = ({ SLocal, SFire }) => {
     return (
-        <ProjectsContext.Provider value={ {projectsState: projects, projectsDispatch: dispatch} }>
-            <CurrPContext.Provider value={ {currPState: currProject, currPDispatch: dispatchCurr} }>
-                <Main />
-            </CurrPContext.Provider>
-        </ProjectsContext.Provider>
+        <styled.PromptContainer>
+            <h3>To Do-ify</h3>
+            <hr/>
+            <h4>Save Your Projects</h4>
+            <p>To function properly this app requires you sign in with Google.
+                Alternatively, you can use local storage<sup>*</sup>
+            </p>
+            <div className={"btnContainer"}>
+                <styled.ChooseStorage onClick={() => SFire(true)}>Use Google</styled.ChooseStorage>
+                <styled.ChooseStorage onClick={() => SLocal(true)}>Use local storage</styled.ChooseStorage>
+            </div>
+            <p className={"footNote"}><sup>*</sup> Using local storage your 'To Dos' and projects will only be available on the machine you are currently using.</p>
+        </styled.PromptContainer>
     )
 }
+
+const App: React.FC = () => {
+    const [useFire, setUseFire] = useState<boolean>(false)
+    const [useLocal, setUseLocal] = useState<boolean>(false)
+
+    return (
+        <styled.AppStyles>
+            { !useFire && !useLocal && <Prompt SLocal={setUseLocal} SFire={setUseFire}/> }
+
+            { useLocal && <FetchData />}
+            { useFire && <Firebase />}
+        </styled.AppStyles>
+    );
+};
 
 export default App;

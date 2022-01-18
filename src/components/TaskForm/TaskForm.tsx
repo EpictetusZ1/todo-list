@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Task, ITaskFormProps} from "../../types/Project.types";
 import * as styled from "./TaskForm.styles";
-import {CurrPContext, ProjectsContext} from "../../App";
+import {CurrPContext, ProjectsContext} from "../Main/Main";
 import uniqid from "uniqid";
 
 export const TaskForm: React.FC<ITaskFormProps> = ({toggleForm} ) => {

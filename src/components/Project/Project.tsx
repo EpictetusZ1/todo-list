@@ -3,7 +3,7 @@ import { TaskCard } from "../TaskCard/TaskCard";
 import { TaskForm } from "../TaskForm/TaskForm";
 import React, {useContext, useState} from "react";
 import * as styled from "./Project.styles";
-import {CurrPContext} from "../../App";
+import {CurrPContext} from "../Main/Main";
 
 export const Project: React.FC = (  ) => {
     const [showForm, setShowForm] = useState(false)

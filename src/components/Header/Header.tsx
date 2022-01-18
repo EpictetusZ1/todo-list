@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react"
 import * as styled from "./Header.styles"
-import { CurrPContext, ProjectsContext } from "../../App";
+import { CurrPContext, ProjectsContext } from "../Main/Main";
 import ProjectForm from "../ProjectForm/ProjectForm";
 import {IProjectType} from "../../types/Project.types";
 
@@ -48,8 +48,7 @@ const Header: React.FC = () => {
                 </select>
             </styled.ProjectSelectStyle>
             {
-                showPForm ?
-                <ProjectForm  toggleForm={setShowPForm} />
+                showPForm ? <ProjectForm toggleForm={setShowPForm} />
                 :
                 <styled.AddProjectBtn  onClick={ () => setShowPForm(prevState => !prevState) }>
                     New Project
