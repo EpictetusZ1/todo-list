@@ -6,10 +6,12 @@ export const HeaderStyle = styled.div`
   width: 100%;
   position: fixed;
   z-index: 2;
-  display: inline-flex;
+  display: inline-grid;
+  grid-template-columns: [col-1-start] 1fr [col-1-end] 3fr [col-2-end] 1fr; 
   align-items: center;
   background-color: ${COLORS.liberty};
   box-shadow: rgba(50, 50, 93, 0.25) 0 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  
   
   h1 {
     font-family: Baskerville, sans-serif;
@@ -17,30 +19,34 @@ export const HeaderStyle = styled.div`
     text-align: center;
     letter-spacing: 1px;
     z-index: 4;
-    width: 100%;
-    position: absolute;
     margin: 0;
     color: ${COLORS.celeste}; 
   }
+  
 `
 
 export const ProjectSelectStyle = styled.div`
-  width: 20%;
-  min-width: 320px;
-  margin: 10px 0 10px 30px;
-  display: flex;
+  max-height: 55px;
+  max-width: 450px;
+  display: inline-flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: auto;
   font-family: Baskerville, sans-serif;
   color: #FFF;
   font-size: 1.5em;
-  z-index: 5;
+  
+  label {
+    width: 50%;
+    padding: 0 5px;
+  }
 
   select {
     border: none;
-    margin: auto;
-    padding: 4px 6px;
+    padding: 2px 5px;
     border-radius: 4px;
+    margin: auto 10px;
   }
 `
 
@@ -61,6 +67,7 @@ export const AddProjectBtn = styled.button`
   line-height: 15px;
   min-height: 30px;
   padding: 2px 5px;
+  margin: auto 10px;
   position: relative;
   z-index: 7;
   text-decoration: none;
@@ -88,5 +95,6 @@ export const AddProjectBtn = styled.button`
     color: rgba(0, 0, 0, 0.65);
     transform: translateY(0);
   } 
-  
 `
+
+

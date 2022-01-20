@@ -84,4 +84,5 @@ export const ButtonStyle = styled.button`
     box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
     color: rgba(0, 0, 0, 0.65);
     transform: translateY(0);
-  }`
+  }
+`

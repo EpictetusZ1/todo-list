@@ -38,3 +38,39 @@ export const SignInGoogle = styled.button`
     background-color: #1C84FF;
   }
 `
+
+export const SignInContainerHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  
+  img {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+  }
+`
+
+export const GoogleSignInHeader = styled.button`
+  color: #fff;
+  background: 0 0;
+  border: none;
+  border-radius: 2px;
+  position: relative;
+  height: 36px;
+  margin: 0;
+  min-width: 75px;
+  padding: 0 16px;
+  display: inline-block;
+  font-family: Futura, sans-serif; 
+  font-weight: bold;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  line-height: 36px;
+  vertical-align: middle;
+`

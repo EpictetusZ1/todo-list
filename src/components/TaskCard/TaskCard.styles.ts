@@ -41,7 +41,6 @@ export const CardHeader = styled.div`
   flex-direction: row;
   justify-content: space-between;
 
-
   button {
     height: 22px;
     width: 22px;
@@ -73,7 +72,7 @@ export const CardHeader = styled.div`
 export const CardSection = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   width: 85%;
   justify-content: space-between;
-  padding-bottom: 10px;
 `

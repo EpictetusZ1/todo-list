@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
 import * as styled from "./styles/App.styles"
-import FetchData from "./components/FetchData";
+import FetchDataLocal from "./components/FetchDataLocal";
 import Firebase from "./components/Firebase/Firebase";
 import {IPromptProps} from "./types/Storage.types";
-
-// TODO: Display a screen asking a user if they want to sign in with google, or use localStorage
 
 const Prompt: React.FC<IPromptProps> = ({ SLocal, SFire }) => {
     return (
@@ -30,12 +28,12 @@ const App: React.FC = () => {
 
     return (
         <styled.AppStyles>
-            { !useFire && !useLocal && <Prompt SLocal={setUseLocal} SFire={setUseFire}/> }
+            { !useFire && !useLocal && <Prompt SLocal={setUseLocal} SFire={setUseFire} /> }
 
-            { useLocal && <FetchData />}
-            { useFire && <Firebase />}
+            {useFire && <Firebase />}
+            {useLocal && <FetchDataLocal />}
         </styled.AppStyles>
-    );
-};
+    )
+}
 
 export default App;

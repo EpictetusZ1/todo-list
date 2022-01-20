@@ -47,7 +47,6 @@ const reducer = (state: IProjects, action: any) => {
                     }
                 }
             }
-
             const updateItem = () => {
                 setIndex()
                 if (myProjects !== undefined) {
@@ -89,7 +88,6 @@ const reducerCurr = (state: IProjectType, action: IAction) => {
             const targetTask: object | undefined = curr.items.find((item: Task) => item.id === action.taskID)
             const index = state.items.findIndex((item: Task) => item.id === action.taskID)
             const newTodos = [...state.items]
-
             // @ts-ignore
             targetTask.status = action.data
             newTodos[index] = targetTask as Task
@@ -101,24 +99,32 @@ const reducerCurr = (state: IProjectType, action: IAction) => {
     }
 }
 
-const Main: React.FC<IAppProps> = ({localProjects}) => {
-    // @ts-ignore
-    const [currProject, dispatchCurr] = useReducer(reducerCurr, localProjects.projects[0])
+const Main: React.FC<IAppProps> = ({localProjects, usingFire, updateFire}) => {
     // @ts-ignore
     const [projects, dispatch] = useReducer(reducer, localProjects)
+    // @ts-ignore
+    const [currProject, dispatchCurr] = useReducer(reducerCurr, localProjects.projects[0])
 
     useEffect(() => {
-        // Save data to local storage on unmount for persistence
+        const updateFirestore = () => {
+            if (usingFire) {
+                if (updateFire) {
+                    updateFire(projects)
+                }
+            }
+        }
+
         return () => {
+            updateFirestore()
             localStorage.setItem("projects", JSON.stringify(projects.projects))
         }
-    })
+    }, [currProject])
 
     return (
         <ProjectsContext.Provider value={ {projectsState: projects, projectsDispatch: dispatch} }>
             <CurrPContext.Provider value={ {currPState: currProject, currPDispatch: dispatchCurr} }>
                 <styled.MainStyles>
-                    <Header />
+                    <Header usingFire={usingFire} />
                     <Project/>
                 </styled.MainStyles>
             </CurrPContext.Provider>
