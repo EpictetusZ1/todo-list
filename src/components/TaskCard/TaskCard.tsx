@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import { ITaskCardProps } from "../../types/Project.types";
 import * as styled from "./TaskCard.styles";
-import { CurrPContext, ProjectsContext } from "../../App";
+import { CurrPContext, ProjectsContext } from "../Main/Main";
 
 export const TaskCard: React.FC<ITaskCardProps> = ({data} ) => {
     const currProjectContext = useContext(CurrPContext)

@@ -3,9 +3,9 @@ import { TaskCard } from "../TaskCard/TaskCard";
 import { TaskForm } from "../TaskForm/TaskForm";
 import React, {useContext, useState} from "react";
 import * as styled from "./Project.styles";
-import {CurrPContext} from "../../App";
+import {CurrPContext} from "../Main/Main";
 
-export const Project: React.FC = (  ) => {
+export const Project: React.FC = () => {
     const [showForm, setShowForm] = useState(false)
     const currProjectContext = useContext(CurrPContext)
 
@@ -21,7 +21,7 @@ export const Project: React.FC = (  ) => {
     }
 
     const makeCard = (currProject: IProjectType) => {
-        const [noStatus, doing, done] =   sortByStatus(currProject)
+        const [noStatus, doing, done] = sortByStatus(currProject)
 
         return (
             <styled.StatusBoardStyle>

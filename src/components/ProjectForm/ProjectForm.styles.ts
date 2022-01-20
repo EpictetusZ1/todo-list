@@ -4,9 +4,10 @@ import {COLORS} from "../../styles/Global.styles";
 export const ProjectFormStyles = styled.div`
   height: auto;
   width: 500px;
+  position: absolute;
   margin-top: 50%;
-  padding: 0 30px;
   z-index: 10;
+  border: 2px solid #a6a0a0;
   border-radius: 30px;
   background: ${COLORS.champagnePink};
   transition: all 0.3s ease-in;
@@ -112,7 +113,6 @@ export const SubmitButton = styled.button`
 
 export const FormHeader = styled.div`
   width: 75%;
-  margin-top: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -130,9 +130,8 @@ export const FormHeader = styled.div`
     cursor: pointer;
     font-family: Verdana, sans-serif;
     font-weight: bold;
-    font-size: .8em;
+    font-size: .6em;
     line-height: .8em;
-    margin: 5px;
     text-align: center;
     user-select: none;
     -webkit-user-select: none;

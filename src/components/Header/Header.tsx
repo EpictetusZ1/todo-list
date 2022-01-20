@@ -1,13 +1,13 @@
 import React, {useContext, useState} from "react"
-import * as styled from "./Header.styles"
-import { CurrPContext, ProjectsContext } from "../../App";
+import { CurrPContext, ProjectsContext } from "../Main/Main";
 import ProjectForm from "../ProjectForm/ProjectForm";
-import {IProjectType} from "../../types/Project.types";
+import {IHeaderProps, IProjectType} from "../../types/Project.types";
+import * as styled from "./Header.styles"
+import {SignOut} from "../Firebase/Firebase";
 
-const Header: React.FC = () => {
+const Header: React.FC<IHeaderProps> = ({usingFire}) => {
     const projectsContext = useContext(ProjectsContext)
     const currPContext = useContext(CurrPContext)
-
     const [showPForm, setShowPForm] = useState<boolean>(false)
 
     const handleSelectedChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
@@ -19,43 +19,46 @@ const Header: React.FC = () => {
                         type: "switchCurr",
                         data: projectsContext.projectsState.projects[i]
                     }
-
                    currPContext.currPDispatch(formatData)
                 }
             }
         }
+
         trackDisplayedProject(e.target.value)
     }
 
     return (
         <styled.HeaderStyle>
+            <div>
+                <h1>To Do-ify</h1>
+            </div>
             <styled.ProjectSelectStyle>
                 <label htmlFor="projects">Select A Project: </label>
                 <select name="projects"
                         onChange={handleSelectedChange}
                         value={currPContext.currPState.id}
                 >
-                    {projectsContext.projectsState.projects.map( (project: IProjectType) => {
-                        return (
-                            <option key={project.id}
-                                    value={project.id}
-                            >
-                                {project.title}
-                            </option>
-                        )
-                    })}
-
+                    {
+                        projectsContext.projectsState.projects.map( (project: IProjectType) => {
+                            return (
+                                <option key={project.id}
+                                        value={project.id}
+                                >
+                                    {project.title}
+                                </option>
+                            )})
+                    }
                 </select>
+                { showPForm ? <ProjectForm toggleForm={setShowPForm} />
+                    :
+                    <styled.AddProjectBtn  onClick={ () => setShowPForm(prevState => !prevState) }>
+                        New Project
+                    </styled.AddProjectBtn>
+                }
             </styled.ProjectSelectStyle>
-            {
-                showPForm ?
-                <ProjectForm  toggleForm={setShowPForm} />
-                :
-                <styled.AddProjectBtn  onClick={ () => setShowPForm(prevState => !prevState) }>
-                    New Project
-                </styled.AddProjectBtn>
-            }
-            <h1>To Do-ify</h1>
+            <div>
+                { usingFire && <SignOut /> }
+            </div>
         </styled.HeaderStyle>
     )
 }

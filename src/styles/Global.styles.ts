@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h2 {
-    margin: 10px 0;
+    margin: 10px 0 0 0 ;
     height: 1.5em;
     width: auto;
     align-items: center;
