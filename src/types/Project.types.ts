@@ -19,7 +19,7 @@ export interface IAppProps {
 
 export interface IAction {
     type: string,
-    data: object | Task,
+    data: Task,
     payload?: object,
     taskID?: string,
     projectID?: string,

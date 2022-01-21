@@ -11,13 +11,13 @@ const FetchDataLocal: React.FC = () => {
         const makeCall = async() => {
             const response = await localStorage.getItem('projects')
             if (response !== null) {
-                return JSON.parse(response)
+                setLocalProjects(JSON.parse(response))
             } else {
-                return initStateBlank
+                // @ts-ignore
+                setLocalProjects(initStateBlank)
             }
         }
         makeCall().then( (r) => {
-            setLocalProjects(r)
             setLoading(false)
         })
     }, [])

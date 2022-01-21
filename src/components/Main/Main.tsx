@@ -71,10 +71,11 @@ const reducerCurr = (state: IProjectType, action: IAction) => {
         default:
             return state
         case "addTask":
-            return {
-                ...state,
-                items: [...state.items, action.data]
-            }
+            const arrWithNewItem = curr.items.concat(action.data)
+            const noDuplicates = (a: Array<Task>) => [...new Set(a)]
+            curr.items = noDuplicates(arrWithNewItem)
+
+            return curr
         case "switchCurr":
             return ({
                 ...action.data
@@ -113,10 +114,9 @@ const Main: React.FC<IAppProps> = ({localProjects, usingFire, updateFire}) => {
                 }
             }
         }
-
         return () => {
             updateFirestore()
-            localStorage.setItem("projects", JSON.stringify(projects.projects))
+            localStorage.setItem("projects", JSON.stringify(projects))
         }
     }, [currProject])
 

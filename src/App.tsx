@@ -4,7 +4,7 @@ import FetchDataLocal from "./components/FetchDataLocal";
 import Firebase from "./components/Firebase/Firebase";
 import {IPromptProps} from "./types/Storage.types";
 
-const Prompt: React.FC<IPromptProps> = ({ SLocal, SFire }) => {
+const Prompt: React.FC<IPromptProps> = ( {SLocal, SFire} ) => {
     return (
         <styled.PromptContainer>
             <h3>To Do-ify</h3>

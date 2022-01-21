@@ -45,6 +45,7 @@ export const TaskForm: React.FC<ITaskFormProps> = ({toggleForm} ) => {
         const dispatchAddTask = {
             type: "addTask",
             data: formPayload,
+            taskID: formPayload.id,
             projectID: currPContext.currPState.id
         }
 

@@ -100,6 +100,7 @@ const Firebase: React.FC = () => {
         }
     },[user])
 
+
     return (
         <styled.DisplayLoginDiv>
             { !auth.currentUser && <SignIn />}
