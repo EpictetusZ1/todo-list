@@ -28,7 +28,7 @@
     "url": "git+https://github.com/EpictetusZ1/todo-list.git"
   },
   "author": "Jack Heaton",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
